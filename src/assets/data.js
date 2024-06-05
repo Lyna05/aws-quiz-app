@@ -39,4 +39,5 @@ export const data = [
       option4: "Amazon RDS",
       ans: 3,
     },
+
   ];
