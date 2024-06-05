@@ -9,8 +9,7 @@ const Quiz = () => {
     const [result, setResult] = useState(false);
     const [feedback, setFeedback] = useState('');
     const [info, setInfo] = useState('');
-
-    const question = data[index]; // Aktuelle Frage basierend auf dem Index
+    const [question, setQuestion] = useState(data[index]); // Verwende useState für die Frage
 
     const checkAns = (e, ans) => {
         if (!lock) {
@@ -34,7 +33,8 @@ const Quiz = () => {
                 setResult(true);
                 return 0;
             }
-            setIndex(prev => prev + 1); // Erhöhe den Index für die nächste Frage
+            setIndex(prev => prev + 1);
+            setQuestion(data[index + 1]); // Aktualisiere die Frage für die nächste Runde
             setLock(false);
             setFeedback('');
             setInfo('');
@@ -53,7 +53,12 @@ const Quiz = () => {
         <div className='container'>
             <h1>Aws Quiz-App</h1>
             <hr />
-            {!result ?
+            {result ? (
+                <>
+                    <h2>You Scored {score} out of {data.length}</h2>
+                    <button onClick={reset}>Reset</button>
+                </>
+            ) : (
                 <>
                     <h2>{index + 1}. {question.question}</h2>
                     <ul>
@@ -62,17 +67,12 @@ const Quiz = () => {
                         <li onClick={(e) => { checkAns(e, 3) }}>{question.option3}</li>
                         <li onClick={(e) => { checkAns(e, 4) }}>{question.option4}</li>
                     </ul>
-                    <button onClick={next}>Weiter</button>
-                    <div className="index">{index + 1} von {data.length} Fragen</div>
-                    {feedback && <div>{feedback}</div>}
-                    {info && <div>Zusätzliche Informationen: {info}</div>}
+                    <button onClick={next}>Next</button>
+                    <div className="index">{index + 1} of {data.length} questions</div>
+                    <div>{feedback}</div> {/* Feedback anzeigen */}
+                    <div>{info}</div> {/* Info anzeigen */}
                 </>
-                :
-                <>
-                    <h2>Du hast {score} von {data.length} Punkten erreicht</h2>
-                    <button onClick={reset}>Neustart</button>
-                </>
-            }
+            )}
         </div>
     )
 }
