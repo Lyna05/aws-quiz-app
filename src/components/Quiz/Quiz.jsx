@@ -77,11 +77,11 @@ const Quiz = () => {
                 <li ref={Option3}onClick={(e)=>{checkAns(e,3)}}>{question.option3}</li>
                 <li ref={Option4}onClick={(e)=>{checkAns(e,4)}}>{question.option4}</li>
             </ul>
-            <button onClick={next}>Next</button>
+            <button onClick={next}>Weiter</button>
             <div className="index">{index+1} of {data.length} questions</div></>}
             {result?<>  
-            <h2>You Scored {score} out of {data.length}</h2>
-            <button onClick={reset}>Reset</button>
+            <h2>Dein Ergebnis {score} von {data.length}</h2>
+            <button onClick={reset}>Neustart</button>
             </>:<></>}
           
             
