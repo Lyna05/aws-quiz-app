@@ -6,6 +6,7 @@ export const data = [
     option3: "Amazon DynamoDB",
     option4: "Amazon Redshift",
     ans: 3,
+    info: "Amazon DynamoDB ist ein vollständig verwalteter NoSQL-Datenbankdienst von AWS."
   },
   {
     question: "Welcher AWS-Service bietet eine skalierbare und verwaltete Container-Orchestrierung?",
@@ -14,6 +15,7 @@ export const data = [
     option3: "Amazon ECS",
     option4: "Amazon Lambda",
     ans: 2,
+    info: "Amazon Elastic Kubernetes Service (Amazon EKS) ist ein verwalteter Kubernetes-Dienst von AWS."
   },
   {
     question: "Welcher AWS-Service bietet einen vollständig verwalteten Stream-Verarbeitungsdienst?",
@@ -22,6 +24,7 @@ export const data = [
     option3: "Amazon Kinesis",
     option4: "Amazon RDS",
     ans: 3,
+    info: "Amazon Kinesis ist ein vollständig verwalteter Stream-Verarbeitungsdienst von AWS."
   },
   {
     question: "Welcher AWS-Service bietet eine Möglichkeit zur Verwaltung von Identitäten und Zugriff auf AWS-Ressourcen?",
@@ -30,6 +33,7 @@ export const data = [
     option3: "Amazon CloudFront",
     option4: "Amazon Cognito",
     ans: 2,
+    info: "Amazon Identity and Access Management (IAM) ist ein AWS-Service zur Verwaltung von Identitäten und Zugriff auf AWS-Ressourcen."
   },
   {
     question: "Welcher AWS-Service bietet einen vollständig verwalteten Dateispeicherdienst?",
@@ -38,6 +42,7 @@ export const data = [
     option3: "Amazon S3",
     option4: "Amazon RDS",
     ans: 3,
+    info: "Amazon Simple Storage Service (S3) ist ein vollständig verwalteter Dateispeicherdienst von AWS."
   },
   {
     question: "Welcher AWS-Service bietet das Hosting von statischen Websites?",
@@ -46,6 +51,7 @@ export const data = [
     option3: "Amazon Lightsail",
     option4: "Amazon CloudFront",
     ans: 1,
+    info: "Amazon Simple Storage Service (S3) kann verwendet werden, um statische Websites zu hosten."
   },
   {
     question: "Welcher AWS-Service bietet serverlose Berechnungsressourcen?",
@@ -54,6 +60,7 @@ export const data = [
     option3: "Amazon ECS",
     option4: "Amazon RDS",
     ans: 2,
+    info: "AWS Lambda bietet serverlose Berechnungsressourcen und ermöglicht die Ausführung von Code ohne Bereitstellung oder Verwaltung von Servern."
   },
   {
     question: "Welcher AWS-Service bietet die Echtzeit-Überwachung von AWS-Ressourcen und Anwendungen?",
@@ -62,6 +69,7 @@ export const data = [
     option3: "AWS Config",
     option4: "Amazon Inspector",
     ans: 1,
+    info: "Amazon CloudWatch bietet Überwachungsdienste für AWS-Ressourcen und Anwendungen in Echtzeit."
   },
   {
     question: "Welcher AWS-Service bietet einen voll verwalteten SQL-Datenbankdienst?",
@@ -70,6 +78,7 @@ export const data = [
     option3: "Amazon Redshift",
     option4: "Amazon Neptune",
     ans: 1,
+    info: "Amazon Aurora ist ein vollständig verwalteter SQL-Datenbankdienst von AWS."
   },
   {
     question: "Welcher AWS-Service ermöglicht das Verwalten von Berechtigungen und Sicherheitsrichtlinien?",
@@ -78,6 +87,7 @@ export const data = [
     option3: "Amazon GuardDuty",
     option4: "AWS Shield",
     ans: 1,
+    info: "Amazon Identity and Access Management (IAM) ermöglicht das Verwalten von Berechtigungen und Sicherheitsrichtlinien für AWS-Ressourcen."
   },
   {
     question: "Welcher AWS-Service unterstützt ein Content Delivery Network (CDN)?",
@@ -86,6 +96,7 @@ export const data = [
     option3: "Amazon Route 53",
     option4: "AWS Global Accelerator",
     ans: 1,
+    info: "Amazon CloudFront ist ein Content Delivery Network (CDN) von AWS."
   },
   {
     question: "Welcher AWS-Service bietet verwaltete Graphdatenbanken?",
@@ -94,6 +105,7 @@ export const data = [
     option3: "Amazon Neptune",
     option4: "Amazon DynamoDB",
     ans: 3,
+    info: "Amazon Neptune bietet verwaltete Graphdatenbanken von AWS."
   },
   {
     question: "Welcher AWS-Service bietet eine serverlose Datenbank?",
@@ -102,6 +114,7 @@ export const data = [
     option3: "Amazon Redshift",
     option4: "Amazon DynamoDB",
     ans: 2,
+    info: "Amazon Aurora Serverless ist eine serverlose Datenbankoption von AWS."
   },
   {
     question: "Welcher AWS-Service ermöglicht die einfache Bereitstellung und Skalierung von Webanwendungen?",
@@ -110,6 +123,7 @@ export const data = [
     option3: "Amazon CloudFront",
     option4: "Amazon RDS",
     ans: 2,
+    info: "AWS Elastic Beanstalk ermöglicht die einfache Bereitstellung und Skalierung von Webanwendungen auf AWS."
   },
   {
     question: "Welcher AWS-Service bietet automatisierte Sicherheitsüberprüfungen?",
@@ -118,5 +132,6 @@ export const data = [
     option3: "Amazon Inspector",
     option4: "Amazon GuardDuty",
     ans: 3,
+    info: "Amazon Inspector bietet automatisierte Sicherheitsüberprüfungen für AWS-Ressourcen."
   }
 ];
