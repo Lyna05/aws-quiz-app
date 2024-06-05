@@ -39,6 +39,7 @@ export const data = [
       option4: "Amazon RDS",
       ans: 3,
     },
+ 
     {
       question: "Welcher AWS-Service bietet einen vollständig verwalteten Dateispeicherdienst?",
       option1: "Amazon EBS",
@@ -127,4 +128,5 @@ export const data = [
       option4: "Amazon GuardDuty",
       ans: 3,
     }
+
   ];
