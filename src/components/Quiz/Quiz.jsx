@@ -78,41 +78,55 @@ const Quiz = () => {
 
     return (
         <div className='container'>
-            <h1>Aws Quiz-App</h1>
-            <hr />
-            {result ? (
-                <>
-                    <h2>Dein Ergebnis {score} von {data.length}</h2>
-                    <button onClick={reset}>Neustart</button>
-                    <div>
-                        <input type="text" value={feedback} onChange={(e) => setFeedback(e.target.value)} placeholder="Dein Feedback" required />
-                        <select value={rating} onChange={(e) => setRating(e.target.value)} required>
-                            <option value="">Bewerte die App</option>
-                            <option value="1">1 Stern</option>
-                            <option value="2">2 Sterne</option>
-                            <option value="3">3 Sterne</option>
-                            <option value="4">4 Sterne</option>
-                            <option value="5">5 Sterne</option>
-                        </select>
-                        <button onClick={sendFeedback}>Feedback senden</button>
-                    </div>
-                </>
-            ) : (
-                <>
-                    <h2>{index + 1}. {question.question}</h2>
-                    <ul>
-                        <li ref={Option1} onClick={(e) => checkAns(e, 1)}>{question.option1}</li>
-                        <li ref={Option2} onClick={(e) => checkAns(e, 2)}>{question.option2}</li>
-                        <li ref={Option3} onClick={(e) => checkAns(e, 3)}>{question.option3}</li>
-                        <li ref={Option4} onClick={(e) => checkAns(e, 4)}>{question.option4}</li>
-                    </ul>
-                    <button onClick={next}>Weiter</button>
-                    <div className="index">{index + 1} von {data.length} Fragen</div>
-                    <div>{feedback}</div> {/* Feedback anzeigen */}
-                </>
-            )}
-        </div>
+        <h1>Aws Quiz-App</h1>
+        <hr />
+        {result ? (
+          <>
+            <h2>Dein Ergebnis {score} von {data.length}</h2>
+            <button onClick={reset}>Neustart</button>
+            <div>
+              <input type="text" value={feedback} onChange={(e) => setFeedback(e.target.value)} placeholder="Dein Feedback" required />
+              <select value={rating} onChange={(e) => setRating(e.target.value)} required>
+                <option value="">Bewerte die App</option>
+                <option value="1">1 Stern</option>
+                <option value="2">2 Sterne</option>
+                <option value="3">3 Sterne</option>
+                <option value="4">4 Sterne</option>
+                <option value="5">5 Sterne</option>
+              </select>
+              <button onClick={sendFeedback}>Feedback senden</button>
+            </div>
+          </>
+        ) : (
+          <>
+            <h2>{index + 1}. {question.question}</h2>
+            <ul>
+              <li ref={Option1} onClick={(e) => checkAns(e, 1)}>{question.option1}</li>
+              <li ref={Option2} onClick={(e) => checkAns(e, 2)}>{question.option2}</li>
+              <li ref={Option3} onClick={(e) => checkAns(e, 3)}>{question.option3}</li>
+              <li ref={Option4} onClick={(e) => checkAns(e, 4)}>{question.option4}</li>
+            </ul>
+            <button onClick={next}>Weiter</button>
+            <div className="index">{index + 1} von {data.length} Fragen</div>
+            <div>
+              <input type="text" value={feedback} onChange={(e) => setFeedback(e.target.value)} placeholder="Dein Feedback" required />
+              <select value={rating} onChange={(e) => setRating(e.target.value)} required>
+                <option value="">Bewerte die App</option>
+                <option value="1">1 Stern</option>
+                <option value="2">2 Sterne</option>
+                <option value="3">3 Sterne</option>
+                <option value="4">4 Sterne</option>
+                <option value="5">5 Sterne</option>
+              </select>
+              <button onClick={sendFeedback}>Feedback senden</button>
+            </div>
+          </>
+        )}
+      </div>
     );
-};
+  };
+        
+
+        
 
 export default Quiz;
