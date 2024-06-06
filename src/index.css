@@ -14,3 +14,12 @@
     padding: 40px 50px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+body{
+  height: 100vh;
+  background-image: linear-gradient(#D8C7FF, #19006C);
+  font-family:'poppins', sans-serif;
+}
+
+
+
+
