@@ -1,100 +1,65 @@
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #f5f5f5;
-  margin: 0;
-  padding: 0;
-
+.quiz-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
 }
 
-.container {
-width: 90%;
-max-width: 900px;
-margin: auto;
-margin-top: 50px;
-background: white;
-color: #262626;
-display: flex;
-flex-direction: column;
-gap: 20px;
-border-radius: 10px;
-padding: 40px;
-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.quiz-container button {
+  border-radius: 10px;
+  margin: 10px 0; /* modificare pentru a separa butoanele */
+  padding: 10px 80px; /* modificare pentru a mări butoanele și a le face mai lungi */
+  font-size: 12px;
+  background-color: rgb(90, 90, 163); /* Adăugăm culoarea albastră */
+  color: rgb(16, 16, 16); /* Schimbăm culoarea textului la alb pentru a contrasta */
+  display: block; /* afișarea butoanelor într-o linie separată */
 }
 
-.container hr {
-height: 2px;
-border: none;
-background: #707070;
+.quiz-container button.stars {
+  background-color: #4343da;
+  border: none;
+  cursor: pointer;
 }
 
-.container h2 {
-font-size: 27px;
-font-weight: 500;
+.quiz-container button.stars:hover {
+  background-color: #1f2bb1;
 }
 
-.container ul {
-list-style: none;
-padding: 0;
+.quiz-container p {
+  font-size: 18px;
+  margin: 15px 0; /* modificare pentru a separa răspunsurile */
 }
 
-.container ul li {
-display: flex;
-align-items: center;
-height: 70px;
-padding-left: 15px;
-border: 1px solid #686868;
-border-radius: 8px;
-margin-bottom: 20px;
-font-size: 20px;
-cursor: pointer;
+.quiz-container .correct-answer {
+  color: green;
 }
 
-.container button {
-margin: auto;
-width: 100%;
-max-width: 250px;
-height: 65px;
-background-color: #553f9a;
-color: #fff;
-font-size: 25px;
-font-weight: 500;
-border-radius: 8px;
-cursor: pointer;
-border: none;
+.quiz-container .wrong-answer {
+  color: red;
 }
 
-.container .index {
-margin: auto;
-font-size: 18px;
+.navigation-buttons {
+  display: flex;
+  justify-content: center; /* centram butoanele pe axa orizontală */
+  margin-top: 15px; /* ajustăm spațiul de deasupra al butoanelor */
 }
 
-.container .correct {
-background: #dffff2;
-border-color: #00d397;
-}
-
-.container .wrong {
-  background: #FFEBEB;
-  border-color: #FF4A4A;
-}
-
-.container .feedback-form {
-  text-align: center; /* Zentriere den Feedback-Button */
-}
-
-.container .feedback-form textarea {
-  width: 100%;
-  resize: vertical; /* Erlaube vertikale Größenänderung */
-  min-height: 100px; /* Mindesthöhe */
-  margin-bottom: 10px; /* Abstand unterhalb des Textbereichs */
-}
-
-.container .feedback-form select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+.prev-button,
+.next-button {
   font-size: 16px;
-  margin-bottom: 10px;
+  padding: 10px 20px;
+  margin: 0 5px; /* spațiere între butoane */
+}
+
+.response-button {
+  margin-top: 20px; /* adăugăm spațiu între butonul de afișare a răspunsului și celelalte butoane */
+  font-size: 16px;
+  padding: 10px 20px;
+  background-color: #ffa500; /* culoare portocalie */
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: none; /* ascundem butonul initial */
+  margin: 0 auto; /* centram butonul */
 }
