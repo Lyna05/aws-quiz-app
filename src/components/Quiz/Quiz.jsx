@@ -10,6 +10,7 @@ function Quiz() {
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [rating, setRating] = useState(0); // Rating pentru steluțe
   const [showStars, setShowStars] = useState(false); // Controlăm vizibilitatea steluțelor
+  const [showResult, setShowResult] = useState(false); // Controlăm vizibilitatea rezultatului
 
   const handleOptionClick = (optionIndex) => {
     setSelectedOption(optionIndex);
@@ -42,6 +43,10 @@ function Quiz() {
 
   const handleRating = (rate) => {
     setRating(rate);
+  };
+
+  const handleShowResult = () => {
+    setShowResult(true); // Afiseaza rezultatul final
   };
 
   const question = data[currentQuestion];
@@ -119,19 +124,22 @@ function Quiz() {
           </div>
         )}
 
-        {/* Container pentru videoclip */}
-        <div className="video-container">
-          <h3>Erklärungsvideo:</h3>
-          <iframe 
-            width="560" 
-            height="315" 
-            src="https://www.youtube.com/embed/UylUjZOP7fU" 
-            title="YouTube video player" 
-            frameBorder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowFullScreen
-          ></iframe>
-        </div>
+        {/* Buton pentru afișarea rezultatului */}
+        {currentQuestion === data.length - 1 && (
+          <button onClick={handleShowResult} className="show-result-button">
+            Ergebnis anzeigen
+          </button>
+        )}
+
+        {/* Afișarea rezultatului */}
+        {showResult && (
+          <div className="result-container">
+            <h3>Ergebnis:</h3>
+            <p>Anzahl der richtigen Fragen: {correctAnswers} / {totalQuestions}</p>
+            <p>Präzision: {accuracy.toFixed(2)}%</p>
+          </div>
+        )}
+
       </div>
 
       {/* Elementul pentru bulinele numerotate */}
@@ -141,12 +149,6 @@ function Quiz() {
         ))}
       </div>
 
-      {/* Afișarea rezultatului */}
-      <div className="result-container">
-        <h3>Ergebnis:</h3>
-        <p>Anzahl der richtigen Fragen: {correctAnswers} / {totalQuestions}</p>
-        <p>Präzision: {accuracy.toFixed(2)}%</p>
-      </div>
     </div>
   );
 }
