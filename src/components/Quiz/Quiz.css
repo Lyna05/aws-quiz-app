@@ -15,14 +15,14 @@
   display: block; /* afișarea butoanelor într-o linie separată */
 }
 
-.quiz-container button.stars {
-  background-color: #4343da;
-  border: none;
-  cursor: pointer;
+.quiz-container button.correct {
+  background-color: green;
+  color: white;
 }
 
-.quiz-container button.stars:hover {
-  background-color: #1f2bb1;
+.quiz-container button.wrong {
+  background-color: red;
+  color: white;
 }
 
 .quiz-container p {
@@ -41,7 +41,7 @@
 .navigation-buttons {
   display: flex;
   justify-content: center; /* centram butoanele pe axa orizontală */
-  margin-top: 15px; /* ajustăm spațiul de deasupra al butoanelor */
+  margin-bottom: 15px; /* ajustăm spațiul de dedesubtul butoanelor */
 }
 
 .prev-button,
@@ -51,15 +51,113 @@
   margin: 0 5px; /* spațiere între butoane */
 }
 
-.response-button {
-  margin-top: 20px; /* adăugăm spațiu între butonul de afișare a răspunsului și celelalte butoane */
-  font-size: 16px;
+.show-answer-button {
+  display: inline-block; /* modificare pentru a afișa butonul pe aceeași linie */
+  margin-left: 20px; /* adăugăm un spațiu între butoane */
   padding: 10px 20px;
-  background-color: #ffa500; /* culoare portocalie */
+  font-size: 16px;
+  background-color: #4343da;
   color: white;
   border: none;
-  border-radius: 10px;
   cursor: pointer;
-  display: none; /* ascundem butonul initial */
-  margin: 0 auto; /* centram butonul */
+}
+
+.show-answer-button:hover {
+  background-color: #1f2bb1;
+}
+
+.full-answer p {
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+/* Stiluri pentru numărul întrebării */
+.question-number {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+/* Adăugăm un container specific pentru butoanele de răspuns */
+.answer-buttons {
+  margin: 20px 0;
+}
+
+.answer-buttons button {
+  width: 100%; /* facem butoanele să ocupe întreaga lățime a containerului */
+  max-width: 500px; /* limităm lățimea maximă */
+  padding: 15px; /* mărim padding-ul pentru a face butoanele mai mari */
+  margin: 10px auto; /* centram butoanele și adăugăm spațiu între ele */
+  font-size: 16px; /* mărim fontul */
+}
+
+/* Container pentru butonul de afișare a răspunsului și feedback */
+.answer-feedback-container {
+  display: flex;
+  justify-content: space-between; /* plasăm butoanele la marginile containerului */
+  align-items: center; /* aliniem butoanele pe axa verticală */
+  margin: 20px 0;
+}
+
+.feedback-toggle-button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4343da;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.feedback-toggle-button:hover {
+  background-color: #1f2bb1;
+}
+
+.feedback-buttons {
+  display: flex;
+  flex-direction: column; /* aliniem butoanele vertical */
+}
+
+.star-rating {
+  margin-top: 10px;
+}
+
+.feedback-buttons span {
+  cursor: pointer;
+}
+
+.quiz-container {
+  display: flex;
+}
+
+.number-box {
+  width: 50px;
+  height: 50px;
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px; /* Spațiu între chenar și conținutul întrebărilor */
+}
+
+
+.dot {
+  width: 20px;
+  height: 20px;
+  background-color: #ccc;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dot-container {
+  position: absolute;
+  top: 20px; /* ajustează distanța verticală */
+  right: 20px; /* ajustează distanța de la marginea dreaptă */
+  width: 3cm; /* lățimea dorită */
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 coloane egale */
+  grid-template-rows: repeat(5, 1fr); /* 5 rânduri egale */
+  grid-gap: 5px; /* spațiu între buline */
 }

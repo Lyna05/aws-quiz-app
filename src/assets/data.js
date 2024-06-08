@@ -6,11 +6,11 @@ export const data = [
     option3: "Amazon DynamoDB",
     option4: "Amazon Redshift",
     ans: 3,
-    info: "Das ist richtig, weil Amazon DynamoDB ein vollständig verwalteter NoSQL-Datenbankdienst von AWS ist.",
+    info: "Der  richtige antwort ist DynamoDB,weil Amazon DynamoDB ein vollständig verwalteter NoSQL-Datenbankdienst von AWS ist.",
     wrongInfo: {
-      option1: "Das ist nicht richtig, weil Amazon S3 ein Objektspeicher und kein NoSQL-Datenbankdienst ist.",
-      option2: "Das ist nicht richtig, weil Amazon RDS ein relationaler Datenbankdienst und kein NoSQL-Datenbankdienst ist.",
-      option4: "Das ist nicht richtig, weil Amazon Redshift ein Data Warehouse Dienst und kein NoSQL-Datenbankdienst ist."
+      option1: "Das ist nichts die richtige Antwort, weil Amazon S3 ein Objektspeicher und kein NoSQL-Datenbankdienst ist.",
+      option2: "Das ist nichts die richtige Antwort, weil Amazon RDS ein relationaler Datenbankdienst und kein NoSQL-Datenbankdienst ist.",
+      option4: "Das ist nichts die richtige Antwort, weil Amazon Redshift ein Data Warehouse Dienst und kein NoSQL-Datenbankdienst ist."
     }
   },
   {
@@ -20,11 +20,11 @@ export const data = [
     option3: "Amazon ECS",
     option4: "AWS Lambda",
     ans: 2,
-    info: "Das ist richtig, weil Amazon Elastic Kubernetes Service (Amazon EKS) ein verwalteter Kubernetes-Dienst von AWS ist.",
+    info: "Der  richtige Antwort ist Amazon EKS, weil Amazon Elastic Kubernetes Service (Amazon EKS) ein verwalteter Kubernetes-Dienst von AWS ist.",
     wrongInfo: {
-      option1: "Das ist nicht richtig, weil Amazon EC2 virtuelle Server bietet, aber keine Container-Orchestrierung.",
-      option3: "Das ist nicht richtig, weil Amazon ECS ein Container-Orchestrierungsdienst ist, aber nicht auf Kubernetes-Basis.",
-      option4: "Das ist nicht richtig, weil AWS Lambda serverlose Berechnungsressourcen bietet, aber keine Container-Orchestrierung."
+      option1: "Das ist nichts die richtige Antwort, weil Amazon EC2 virtuelle Server bietet, aber keine Container-Orchestrierung.",
+      option3: "Das ist nichts die  richtige Antwort, weil Amazon ECS ein Container-Orchestrierungsdienst ist, aber nicht auf Kubernetes-Basis.",
+      option4: "Das ist nichts die richtige  Antwort, weil AWS Lambda serverlose Berechnungsressourcen bietet, aber keine Container-Orchestrierung."
     }
   },
   {
@@ -34,11 +34,11 @@ export const data = [
     option3: "Amazon EBS",
     option4: "Amazon S3",
     ans: 4,
-    info: "Das ist richtig, weil Amazon S3 ein skalierbarer, objektbasierter Speicherdienst von AWS ist.",
+    info: "Der  richtige Antwort ist Amazon S3, weil Amazon S3 ein skalierbarer, objektbasierter Speicherdienst von AWS ist.",
     wrongInfo: {
-      option1: "Das ist nicht richtig, weil Amazon EC2 virtuelle Server bereitstellt, aber kein Speicherdienst ist.",
-      option2: "Das ist nicht richtig, weil Amazon RDS ein relationaler Datenbankdienst ist und kein Speicherdienst.",
-      option3: "Das ist nicht richtig, weil Amazon EBS (Elastic Block Store) ein Blockspeicherdienst ist, aber nicht objektbasiert wie S3."
+      option1: "Das ist nichts die richtige Antwort, weil Amazon EC2 virtuelle Server bereitstellt, aber kein Speicherdienst ist.",
+      option2: "Das ist nichts die richtige Antwort, weil Amazon RDS ein relationaler Datenbankdienst ist und kein Speicherdienst.",
+      option3: "Das ist nichts die richtige Antwort , weil Amazon EBS (Elastic Block Store) ein Blockspeicherdienst ist, aber nicht objektbasiert wie S3."
     }
   },
   {

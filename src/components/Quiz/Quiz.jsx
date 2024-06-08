@@ -6,75 +6,94 @@ function Quiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [showAnswer, setShowAnswer] = useState(false);
-  const [feedback, setFeedback] = useState(0); // Starea pentru feedback
+  const [feedback, setFeedback] = useState(0);
 
   const handleOptionClick = (optionIndex) => {
     setSelectedOption(optionIndex);
-    setShowAnswer(true);
+    setShowAnswer(false);
   };
 
   const handleNextQuestion = () => {
     setSelectedOption(null);
     setShowAnswer(false);
     setCurrentQuestion((prevQuestion) => (prevQuestion + 1) % data.length);
-    setFeedback(0); // Resetăm feedback-ul la următoarea întrebare
   };
 
   const handlePrevQuestion = () => {
     setSelectedOption(null);
     setShowAnswer(false);
     setCurrentQuestion((prevQuestion) => (prevQuestion - 1 + data.length) % data.length);
-    setFeedback(0); // Resetăm feedback-ul la întrebarea anterioară
   };
 
-  const question = data[currentQuestion];
+  const handleShowAnswer = () => {
+    setShowAnswer(!showAnswer);
+    setSelectedOption(null);
+  };
 
   const handleFeedback = (rating) => {
     setFeedback(rating);
   };
 
-  const handleShowAnswer = () => {
-    setShowAnswer(!showAnswer);
-  };
+  const question = data[currentQuestion];
 
   return (
     <div className="quiz-container">
-      <h2>{question.question}</h2>
-      <p>Frage #{currentQuestion + 1} von {data.length}</p>
-      <div>
-        <button onClick={() => handleOptionClick(1)}>{question.option1}</button>
-        <button onClick={() => handleOptionClick(2)}>{question.option2}</button>
-        <button onClick={() => handleOptionClick(3)}>{question.option3}</button>
-        <button onClick={() => handleOptionClick(4)}>{question.option4}</button>
+      <div className="quiz-content">
+        <h2>{question.question}</h2>
+        <p className="question-number">Frage {currentQuestion + 1} von {data.length}</p>
+        <div className="answer-buttons">
+          <button
+            onClick={() => handleOptionClick(1)}
+            className={selectedOption === 1 ? (question.ans === 1 ? "correct" : "wrong") : ""}
+          >
+            {question.option1}
+          </button>
+          <button
+            onClick={() => handleOptionClick(2)}
+            className={selectedOption === 2 ? (question.ans === 2 ? "correct" : "wrong") : ""}
+          >
+            {question.option2}
+          </button>
+          <button
+            onClick={() => handleOptionClick(3)}
+            className={selectedOption === 3 ? (question.ans === 3 ? "correct" : "wrong") : ""}
+          >
+            {question.option3}
+          </button>
+          <button
+            onClick={() => handleOptionClick(4)}
+            className={selectedOption === 4 ? (question.ans === 4 ? "correct" : "wrong") : ""}
+          >
+            {question.option4}
+          </button>
+        </div>
+
+        <div className="navigation-buttons">
+          <button onClick={handlePrevQuestion} className="prev-button">Vorherige Frage</button>
+          <button onClick={handleNextQuestion} className="next-button">Nächste Frage</button>
+        </div>
+
+        <div className="answer-feedback-container">
+          <button onClick={handleShowAnswer} className="show-answer-button">
+            {showAnswer ? 'Verbergen Antwort' : 'Zeige Antwort'}
+          </button>
+        </div>
+
+        {showAnswer && (
+          <div className="full-answer">
+            <p className="correct-answer">{question.info}</p>
+            <p className="wrong-answer">{question.wrongInfo.option1}</p>
+            <p className="wrong-answer">{question.wrongInfo.option2}</p>
+            <p className="wrong-answer">{question.wrongInfo.option3}</p>
+            <p className="wrong-answer">{question.wrongInfo.option4}</p>
+          </div>
+        )}
       </div>
 
-      {/* Butonul pentru afișarea răspunsului */}
-      <button onClick={handleShowAnswer} className="response-button">Zeige Antwort</button>
-
-      {showAnswer && (
-        <div>
-          <p>Antwort: {question.info}</p>
-          <p>Falsch. {question.wrongInfo[`option${selectedOption}`]}</p>
-          <p>Corect: {question.correctInfo[`option${question.ans}`]}</p>
-          <p>Feedback: {feedback}</p>
-        </div>
-      )}
-
-      {/* Butonul pentru întrebarea precedentă */}
-      <button onClick={handlePrevQuestion} className="small-button">Vorherige Frage</button>
-      
-      {/* Butonul pentru întrebarea următoare */}
-      <button onClick={handleNextQuestion} className="small-button">Nächste Frage</button>
-
-      {/* Adăugăm butoanele de feedback */}
-      <div className="feedback-buttons">
-        <p>Feedback:</p>
-        {[1, 2, 3, 4, 5].map((rating) => (
-          <button key={rating} onClick={() => handleFeedback(rating)}>
-            {[...Array(rating)].map((_, index) => (
-              <span key={index} role="img" aria-label="star">⭐</span>
-            ))}
-          </button>
+      {/* Elementul pentru bulinele numerotate */}
+      <div className="dot-container">
+        {[...Array(25)].map((_, index) => (
+          <div key={index} className="dot">{index + 1}</div>
         ))}
       </div>
     </div>
