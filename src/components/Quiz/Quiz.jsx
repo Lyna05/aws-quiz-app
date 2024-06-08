@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { data } from '../../assets/data';
 import './Quiz.css';
 
@@ -8,13 +8,25 @@ function Quiz() {
   const [showAnswer, setShowAnswer] = useState(false);
   const [feedback, setFeedback] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState(0);
-  const [rating, setRating] = useState(0); // Rating pentru steluțe
-  const [showStars, setShowStars] = useState(false); // Controlăm vizibilitatea steluțelor
-  const [showResult, setShowResult] = useState(false); // Controlăm vizibilitatea rezultatului
+  const [rating, setRating] = useState(0); // Bewertung für Sterne
+  const [showStars, setShowStars] = useState(false); // Sichtbarkeit der Sterne steuern
+  const [showResult, setShowResult] = useState(false); // Sichtbarkeit des Ergebnisses steuern
+  const [showTempResult, setShowTempResult] = useState(false); // Temporäre Anzeige des Ergebnisses steuern
+
+  useEffect(() => {
+    if (showResult) {
+      setShowTempResult(true);
+      const timer = setTimeout(() => {
+        setShowTempResult(false);
+        setShowResult(false); // Ergebnis dauerhaft ausblenden, nachdem es temporär angezeigt wurde
+      }, 5000); // Das Ergebnis wird für 5 Sekunden angezeigt
+      return () => clearTimeout(timer); // Timer bereinigen
+    }
+  }, [showResult]);
 
   const handleOptionClick = (optionIndex) => {
     setSelectedOption(optionIndex);
-    setShowAnswer(true); // Afiseaza raspunsul dupa ce s-a selectat un raspuns
+    setShowAnswer(true); // Antwort anzeigen, nachdem eine Option ausgewählt wurde
   };
 
   const handleNextQuestion = () => {
@@ -38,7 +50,7 @@ function Quiz() {
   };
 
   const handleFeedback = () => {
-    setShowStars(!showStars); // Alternăm vizibilitatea steluțelor
+    setShowStars(!showStars); // Sichtbarkeit der Sterne umschalten
   };
 
   const handleRating = (rate) => {
@@ -46,12 +58,12 @@ function Quiz() {
   };
 
   const handleShowResult = () => {
-    setShowResult(true); // Afiseaza rezultatul final
+    setShowResult(true); // Endergebnis anzeigen
   };
 
   const question = data[currentQuestion];
 
-  // Calcularea numărului de răspunsuri corecte
+  // Berechnung der Anzahl der richtigen Antworten
   const totalQuestions = data.length;
   const accuracy = correctAnswers / totalQuestions * 100;
 
@@ -94,7 +106,7 @@ function Quiz() {
 
         <div className="answer-feedback-container">
           <button onClick={handleShowAnswer} className="show-answer-button">
-            {showAnswer ? 'Verbergen Antwort' : 'Zeige Antwort'}
+            {showAnswer ? 'Antwort verbergen' : 'Antwort anzeigen'}
           </button>
           <button onClick={handleFeedback} className="feedback-button">Feedback</button>
         </div>
@@ -109,7 +121,7 @@ function Quiz() {
           </div>
         )}
 
-        {/* Evaluare cu steluțe - vizibilă doar când se apasă pe Feedback */}
+        {/* Bewertung mit Sternen - sichtbar nur, wenn auf Feedback geklickt wird */}
         {showStars && (
           <div className="star-rating">
             {[...Array(5)].map((_, index) => (
@@ -124,31 +136,44 @@ function Quiz() {
           </div>
         )}
 
-        {/* Buton pentru afișarea rezultatului */}
+        {/* Button zur Anzeige des Ergebnisses */}
         {currentQuestion === data.length - 1 && (
           <button onClick={handleShowResult} className="show-result-button">
             Ergebnis anzeigen
           </button>
         )}
 
-        {/* Afișarea rezultatului */}
-        {showResult && (
-          <div className="result-container">
-            <h3>Ergebnis:</h3>
-            <p>Anzahl der richtigen Fragen: {correctAnswers} / {totalQuestions}</p>
-            <p>Präzision: {accuracy.toFixed(2)}%</p>
-          </div>
-        )}
+        {/* Text und YouTube-Video unter den Buttons "Antwort anzeigen" und "Feedback" */}
+        <div className="video-container">
+          <p className="video-title">Erklärungsvideo</p>
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/3XFODda6YXo"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
 
       </div>
 
-      {/* Elementul pentru bulinele numerotate */}
+      {/* Element für die nummerierten Punkte */}
       <div className="dot-container">
         {[...Array(25)].map((_, index) => (
           <div key={index} className="dot">{index + 1}</div>
         ))}
       </div>
 
+      {/* Temporäre Anzeige des Ergebnisses in der oberen rechten Ecke */}
+      {showTempResult && (
+        <div className="temp-result-container">
+          <h3>Ergebnis:</h3>
+          <p>Anzahl der richtigen Fragen: {correctAnswers} / {totalQuestions}</p>
+          <p>Präzision: {accuracy.toFixed(2)}%</p>
+        </div>
+      )}
     </div>
   );
 }
