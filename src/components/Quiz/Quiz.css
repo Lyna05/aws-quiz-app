@@ -10,18 +10,18 @@
   margin: 10px 0; /* modificare pentru a separa butoanele */
   padding: 10px 80px; /* modificare pentru a mări butoanele și a le face mai lungi */
   font-size: 12px;
-  background-color: rgb(90, 90, 163); /* Adăugăm culoarea albastră */
+  background-color: rgb(227, 227, 251); /* Adăugăm culoarea albastră */
   color: rgb(16, 16, 16); /* Schimbăm culoarea textului la alb pentru a contrasta */
   display: block; /* afișarea butoanelor într-o linie separată */
 }
 
 .quiz-container button.correct {
-  background-color: green;
-  color: white;
+  background-color: rgb(60, 218, 60);
+  color: rgb(219, 231, 219);
 }
 
 .quiz-container button.wrong {
-  background-color: red;
+  background-color: rgb(225, 44, 44);
   color: white;
 }
 
@@ -31,11 +31,11 @@
 }
 
 .quiz-container .correct-answer {
-  color: green;
+  color: #edf3ed;
 }
 
 .quiz-container .wrong-answer {
-  color: red;
+  color: rgb(238, 225, 225);
 }
 
 .navigation-buttons {
@@ -53,7 +53,7 @@
 
 .show-answer-button {
   display: inline-block; /* modificare pentru a afișa butonul pe aceeași linie */
-  margin-left: 20px; /* adăugăm un spațiu între butoane */
+  margin-left: 20px; /* adăugăm un spațiu între #4343da;butoane */
   padding: 10px 20px;
   font-size: 16px;
   background-color: #4343da;
@@ -63,6 +63,21 @@
 }
 
 .show-answer-button:hover {
+  background-color: #1f2bb1;
+}
+
+.feedback-button {
+  display: inline-block; /* modificare pentru a afișa butonul pe aceeași linie */
+  margin-left: 20px; /* adăugăm un spațiu între butoane */
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4343da;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.feedback-button:hover {
   background-color: #1f2bb1;
 }
 
@@ -123,6 +138,15 @@
   margin-top: 10px;
 }
 
+.star {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.star.selected {
+  color: gold;
+}
+
 .feedback-buttons span {
   cursor: pointer;
 }
@@ -140,7 +164,6 @@
   align-items: center;
   margin-right: 20px; /* Spațiu între chenar și conținutul întrebărilor */
 }
-
 
 .dot {
   width: 20px;
@@ -160,4 +183,10 @@
   grid-template-columns: repeat(5, 1fr); /* 5 coloane egale */
   grid-template-rows: repeat(5, 1fr); /* 5 rânduri egale */
   grid-gap: 5px; /* spațiu între buline */
+}
+.result-container {
+  color: rgb(255, 25, 0); /* Setează culoarea textului la albastru */
+}
+.result-container p {
+  color: rgb(255, 25, 0);   /* Setează culoarea textului la albastru */
 }
