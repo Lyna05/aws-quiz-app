@@ -6,27 +6,28 @@ function Quiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [showAnswer, setShowAnswer] = useState(false);
-  const [feedback, setFeedback] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState(0);
-  const [rating, setRating] = useState(0); // Bewertung für Sterne
-  const [showStars, setShowStars] = useState(false); // Sichtbarkeit der Sterne steuern
-  const [showResult, setShowResult] = useState(false); // Sichtbarkeit des Ergebnisses steuern
-  const [showTempResult, setShowTempResult] = useState(false); // Temporäre Anzeige des Ergebnisses steuern
+  const [rating, setRating] = useState(0);
+  const [showStars, setShowStars] = useState(false);
+  const [showResult, setShowResult] = useState(false);
+  const [showTempResult, setShowTempResult] = useState(false);
+  const [shuffledQuestions, setShuffledQuestions] = useState([]);
+  const [isRandomMode, setIsRandomMode] = useState(false);
 
   useEffect(() => {
     if (showResult) {
       setShowTempResult(true);
       const timer = setTimeout(() => {
         setShowTempResult(false);
-        setShowResult(false); // Ergebnis dauerhaft ausblenden, nachdem es temporär angezeigt wurde
-      }, 5000); // Das Ergebnis wird für 5 Sekunden angezeigt
-      return () => clearTimeout(timer); // Timer bereinigen
+        setShowResult(false);
+      }, 5000);
+      return () => clearTimeout(timer);
     }
   }, [showResult]);
 
   const handleOptionClick = (optionIndex) => {
     setSelectedOption(optionIndex);
-    setShowAnswer(true); // Antwort anzeigen, nachdem eine Option ausgewählt wurde
+    setShowAnswer(true);
   };
 
   const handleNextQuestion = () => {
@@ -35,13 +36,23 @@ function Quiz() {
     }
     setSelectedOption(null);
     setShowAnswer(false);
-    setCurrentQuestion((prevQuestion) => (prevQuestion + 1) % data.length);
+
+    if (isRandomMode) {
+      setCurrentQuestion((prevQuestion) => (prevQuestion + 1) % shuffledQuestions.length);
+    } else {
+      setCurrentQuestion((prevQuestion) => (prevQuestion + 1) % data.length);
+    }
   };
 
   const handlePrevQuestion = () => {
     setSelectedOption(null);
     setShowAnswer(false);
-    setCurrentQuestion((prevQuestion) => (prevQuestion - 1 + data.length) % data.length);
+
+    if (isRandomMode) {
+      setCurrentQuestion((prevQuestion) => (prevQuestion - 1 + shuffledQuestions.length) % shuffledQuestions.length);
+    } else {
+      setCurrentQuestion((prevQuestion) => (prevQuestion - 1 + data.length) % data.length);
+    }
   };
 
   const handleShowAnswer = () => {
@@ -50,7 +61,7 @@ function Quiz() {
   };
 
   const handleFeedback = () => {
-    setShowStars(!showStars); // Sichtbarkeit der Sterne umschalten
+    setShowStars(!showStars);
   };
 
   const handleRating = (rate) => {
@@ -58,19 +69,24 @@ function Quiz() {
   };
 
   const handleShowResult = () => {
-    setShowResult(true); // Endergebnis anzeigen
+    setShowResult(true);
   };
 
-  const question = data[currentQuestion];
+  const handleRandomQuestions = () => {
+    const shuffled = data.map((_, index) => index).sort(() => Math.random() - 0.5);
+    setShuffledQuestions(shuffled);
+    setIsRandomMode(true);
+    setCurrentQuestion(shuffled[0]);
+  };
 
-  // Berechnung der Anzahl der richtigen Antworten
+  const question = isRandomMode ? data[shuffledQuestions[currentQuestion]] : data[currentQuestion];
   const totalQuestions = data.length;
-  const accuracy = correctAnswers / totalQuestions * 100;
+  const accuracy = (correctAnswers / totalQuestions) * 100;
 
   return (
     <div className="quiz-container">
+      
       <div className="quiz-content">
-        <h2>{question.question}</h2>
         <p className="question-number">Frage {currentQuestion + 1} von {totalQuestions}</p>
         <div className="answer-buttons">
           <button
@@ -105,10 +121,9 @@ function Quiz() {
         </div>
 
         <div className="answer-feedback-container">
-          <button onClick={handleShowAnswer} className="show-answer-button">
-            {showAnswer ? 'Antwort verbergen' : 'Antwort anzeigen'}
-          </button>
-          <button onClick={handleFeedback} className="feedback-button">Feedback</button>
+          <button onClick={handleShowAnswer} className="quiz-button">Antwort anzeigen</button>
+          <button onClick={handleFeedback} className="quiz-button">Feedback</button>
+          <button onClick={handleRandomQuestions} className="quiz-button">Random fragen</button>
         </div>
 
         {showAnswer && (
@@ -121,7 +136,6 @@ function Quiz() {
           </div>
         )}
 
-        {/* Bewertung mit Sternen - sichtbar nur, wenn auf Feedback geklickt wird */}
         {showStars && (
           <div className="star-rating">
             {[...Array(5)].map((_, index) => (
@@ -136,14 +150,12 @@ function Quiz() {
           </div>
         )}
 
-        {/* Button zur Anzeige des Ergebnisses */}
         {currentQuestion === data.length - 1 && (
           <button onClick={handleShowResult} className="show-result-button">
             Ergebnis anzeigen
           </button>
         )}
 
-        {/* Text und YouTube-Video unter den Buttons "Antwort anzeigen" und "Feedback" */}
         <div className="video-container">
           <p className="video-title">Erklärungsvideo</p>
           <iframe
@@ -159,23 +171,50 @@ function Quiz() {
 
       </div>
 
-      {/* Element für die nummerierten Punkte */}
       <div className="dot-container">
         {[...Array(25)].map((_, index) => (
-          <div key={index} className="dot">{index + 1}</div>
+          <div key={index} className="dot"></div>
         ))}
       </div>
 
-      {/* Temporäre Anzeige des Ergebnisses in der oberen rechten Ecke */}
       {showTempResult && (
-        <div className="temp-result-container">
-          <h3>Ergebnis:</h3>
-          <p>Anzahl der richtigen Fragen: {correctAnswers} / {totalQuestions}</p>
-          <p>Präzision: {accuracy.toFixed(2)}%</p>
+        <div className="result-container">
+          <p>Sie haben {correctAnswers} von {totalQuestions} Fragen richtig beantwortet ({accuracy.toFixed(2)}% Richtigkeit).</p>
         </div>
       )}
-    </div>
-  );
+
+      <div className="services-container">
+        <ul className="services-list">
+        <h2 style={{ color: 'black', fontWeight: 'bold' }}>Die erforderlichen Dienste zum Lernen, um das Zertifikat AWS Cloud Practitioner zu erlangen</h2>
+<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>&#9733; <span
+className="red">Amazon EC2</span></span></li>
+<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Amazon S3</span></span></li>
+<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Amazon SNS</span></span></li>
+<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Amazon SQS</span></span></li>
+<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Speichern</span></span></li>
+<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Datenverarbeitung</span></span></li>
+<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Bereitstellung</span></span></li>
+<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Management</span></span></li>
+<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Überwachung</span></span></li>
+<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Integration</span></span></li>
+<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Skalierung</span></span></li>
+<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Sicherheit</span></span></li>
+<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Analyse</span></span></li>
+<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Optimierung</span></span></li>
+<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Protokollierung</span></span></li>
+<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Authentifizierung</span></span></li>
+<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Autorisierung</span></span></li>
+<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Backup</span></span></li>
+<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Wiederherstellung</span></span></li>
+<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Migration</span></span></li>
+<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Konnektivität</span></span></li>
+<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">API</span></span></li>
+<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Ausfallsicherheit</span></span></li>
+<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Monitoring</span></span></li>
+</ul>
+</div>
+</div>
+);
 }
 
 export default Quiz;

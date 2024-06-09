@@ -7,12 +7,12 @@
 
 .quiz-container button {
   border-radius: 10px;
-  margin: 10px 0; /* Änderung zur Trennung der Schaltflächen */
-  padding: 10px 80px; /* Änderung zur Vergrößerung der Schaltflächen und Verlängerung */
+  margin: 10px 0;
+  padding: 10px 80px;
   font-size: 12px;
-  background-color: rgb(227, 227, 251); /* Hinzufügen der blauen Farbe */
-  color: rgb(16, 16, 16); /* Ändern der Textfarbe in Weiß für Kontrast */
-  display: block; /* Anzeigen der Schaltflächen in einer separaten Zeile */
+  background-color: rgb(227, 227, 251);
+  color: rgb(16, 16, 16);
+  display: block;
 }
 
 .quiz-container button.correct {
@@ -27,7 +27,7 @@
 
 .quiz-container p {
   font-size: 18px;
-  margin: 15px 0; /* Ändern zur Trennung der Antworten */
+  margin: 15px 0;
 }
 
 .quiz-container .correct-answer {
@@ -40,20 +40,22 @@
 
 .navigation-buttons {
   display: flex;
-  justify-content: center; /* Zentrieren der Schaltflächen horizontal */
-  margin-bottom: 15px; /* Anpassen des Platzes unter den Schaltflächen */
+  justify-content: center;
+  margin-bottom: 15px;
 }
 
 .prev-button,
 .next-button {
   font-size: 16px;
   padding: 10px 20px;
-  margin: 0 5px; /* Abstand zwischen den Schaltflächen */
+  margin: 0 5px;
 }
 
-.show-answer-button {
-  display: inline-block; /* Ändern, um die Schaltfläche in derselben Zeile anzuzeigen */
-  margin-left: 20px; /* Hinzufügen eines Abstands zwischen den Schaltflächen */
+.show-answer-button,
+.feedback-button,
+.random-questions-button {
+  display: inline-block;
+  margin-left: 20px;
   padding: 10px 20px;
   font-size: 16px;
   background-color: #4343da;
@@ -62,22 +64,9 @@
   cursor: pointer;
 }
 
-.show-answer-button:hover {
-  background-color: #1f2bb1;
-}
-
-.feedback-button {
-  display: inline-block; /* Ändern, um die Schaltfläche in derselben Zeile anzuzeigen */
-  margin-left: 20px; /* Hinzufügen eines Abstands zwischen den Schaltflächen */
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #4343da;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.feedback-button:hover {
+.show-answer-button:hover,
+.feedback-button:hover,
+.random-questions-button:hover {
   background-color: #1f2bb1;
 }
 
@@ -86,31 +75,28 @@
   margin: 10px 0;
 }
 
-/* Stile für die Fragenummer */
 .question-number {
   font-size: 24px;
   font-weight: bold;
   margin: 10px 0;
 }
 
-/* Hinzufügen eines speziellen Containers für Antwortschaltflächen */
 .answer-buttons {
   margin: 20px 0;
 }
 
 .answer-buttons button {
-  width: 100%; /* Schaltflächen auf die gesamte Breite des Containers erweitern */
-  max-width: 500px; /* Maximale Breite begrenzen */
-  padding: 15px; /* Erhöhen des Padding, um die Schaltflächen zu vergrößern */
-  margin: 10px auto; /* Zentrieren der Schaltflächen und Abstand zwischen ihnen */
-  font-size: 16px; /* Schriftgröße erhöhen */
+  width: 100%;
+  max-width: 500px;
+  padding: 15px;
+  margin: 10px auto;
+  font-size: 16px;
 }
 
-/* Container für Antwort- und Feedbackschaltfläche */
 .answer-feedback-container {
   display: flex;
-  justify-content: space-between; /* Anordnen der Schaltflächen am Rand des Containers */
-  align-items: center; /* Ausrichten der Schaltflächen vertikal */
+  justify-content: space-between;
+  align-items: center;
   margin: 20px 0;
 }
 
@@ -131,7 +117,7 @@
 
 .feedback-buttons {
   display: flex;
-  flex-direction: column; /* Vertikale Ausrichtung der Schaltflächen */
+  flex-direction: column;
 }
 
 .star-rating {
@@ -162,31 +148,47 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 20px; /* Abstand zwischen Rahmen und Inhaltsfragen */
+  margin-right: 20px;
 }
 
-.dot {
-  width: 20px;
-  height: 20px;
-  background-color: #ccc;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .dot-container {
   position: absolute;
-  top: 20px; /* Vertikaler Abstand anpassen */
-  right: 20px; /* Abstand von der rechten Kante anpassen */
-  width: 3cm; /* Gewünschte Breite */
+  top: 20px;
+  right: 20px;
+  width: 3cm;
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5 gleichmäßige Spalten */
-  grid-template-rows: repeat(5, 1fr); /* 5 gleichmäßige Zeilen */
-  grid-gap: 5px; /* Abstand zwischen den Punkten */
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-gap: 5px;
 }
+.red-bold {
+  color: red;
+  font-weight: bold;
+}
+
 .result-container {
-  color: rgb(255, 25, 0); /* Textfarbe auf Blau setzen */
+  color: rgb(255, 25, 0);
 }
+
 .result-container p {
-  color: rgb(255, 25, 0);   /* Textfarbe auf Blau setzen */
+  color: rgb(255, 25, 0);
+}
+
+.services-container {
+  margin-top: 20px;
+}
+
+.services-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.services-list li {
+  margin-bottom: 5px;
+  font-size: 16px;
+  text-align: left;
+}
+
+.bullet {
+  margin-right: 5px;
 }
