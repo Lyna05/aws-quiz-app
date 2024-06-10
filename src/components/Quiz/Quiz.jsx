@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { data } from '../../assets/data';
 import './Quiz.css';
 
@@ -85,9 +85,9 @@ function Quiz() {
 
   return (
     <div className="quiz-container">
-      
       <div className="quiz-content">
         <p className="question-number">Frage {currentQuestion + 1} von {totalQuestions}</p>
+        <p>{question.question}</p> {/* Textul întrebării */}
         <div className="answer-buttons">
           <button
             onClick={() => handleOptionClick(1)}
@@ -168,7 +168,6 @@ function Quiz() {
             allowFullScreen
           ></iframe>
         </div>
-
       </div>
 
       <div className="dot-container">
@@ -185,31 +184,13 @@ function Quiz() {
 
       <div className="services-container">
         <ul className="services-list">
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>&#9733; <span
-className="red">Amazon EC2</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Amazon S3</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Amazon SNS</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Amazon SQS</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Speichern</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Datenverarbeitung</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Bereitstellung</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Management</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Überwachung</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Integration</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Skalierung</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Sicherheit</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Analyse</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Optimierung</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Protokollierung</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Authentifizierung</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Autorisierung</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Backup</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Wiederherstellung</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Migration</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Konnektivität</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">API</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Ausfallsicherheit</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Monitoring</span></span></li>
+          <h2
+style={{ color: 'black', fontWeight: 'bold' }}></h2>
+{[
+
+].map((service, index) => (
+<li key={index}>{service}</li>
+))}
 </ul>
 </div>
 </div>
