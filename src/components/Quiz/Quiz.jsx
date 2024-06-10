@@ -87,7 +87,7 @@ function Quiz() {
     <div className="quiz-container">
       <div className="quiz-content">
         <p className="question-number">Frage {currentQuestion + 1} von {totalQuestions}</p>
-        <p>{question.question}</p> {/* Textul întrebării */}
+        <p className="question-text">{question.question}</p> {/* Textul întrebării */}
         <div className="answer-buttons">
           <button
             onClick={() => handleOptionClick(1)}
@@ -121,9 +121,9 @@ function Quiz() {
         </div>
 
         <div className="answer-feedback-container">
-          <button onClick={handleShowAnswer} className="quiz-button">Antwort anzeigen</button>
-          <button onClick={handleFeedback} className="quiz-button">Feedback</button>
-          <button onClick={handleRandomQuestions} className="quiz-button">Random fragen</button>
+          <button onClick={handleShowAnswer} className="quiz-button">Antwort-Anzeigen</button>
+          <button onClick={handleFeedback} className="quiz-button">Feedback-Senden</button>
+          <button onClick={handleRandomQuestions} className="quiz-button">Random-Fragen</button>
         </div>
 
         {showAnswer && (
@@ -184,17 +184,15 @@ function Quiz() {
 
       <div className="services-container">
         <ul className="services-list">
-          <h2
-style={{ color: 'black', fontWeight: 'bold' }}></h2>
-{[
-
-].map((service, index) => (
-<li key={index}>{service}</li>
-))}
-</ul>
-</div>
-</div>
-);
+          <h2 className="red-bold"></h2>
+          <li style={{ color: 'white' }}></li>
+          {[].map((service, index) => (
+            <li key={index}>{service}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
 }
 
 export default Quiz;

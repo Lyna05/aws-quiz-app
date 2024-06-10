@@ -1,3 +1,6 @@
+.question-number, .question-text {
+  color: white;
+}
 .quiz-container {
   max-width: 600px;
   margin: 0 auto;
