@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <head>
   <meta charset="UTF-8" />
@@ -8,9 +8,50 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      /* Fügen Sie das Hintergrundbild hinzu */
+      background-image: url('./Aws.webp'); /* Ersetzen Sie 'Pfad-zum-Bild.jpg' durch Ihren eigenen Bildpfad */
+      background-size: cover; /* Passen Sie die Bildgröße an, um die gesamte Fläche abzudecken */
+      background-position: center; /* Passen Sie die Position des Hintergrundbildes an */
+    }
+
+    #overlay {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 999;
+      max-width: 300px;
+      max-height: 200px;
+      overflow: auto;
+    }
+
+    #root {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Modificare: Textul "APP AWS QUIZ PROJEKT" scris cu negru și font gros */
+    #overlay h1 {
+      color: black;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body>
+  <div id="overlay">
+    <h1> AWS QUIZ PROJEKT APP</h1>
+    <p>Dieses Projekt wird von Oskar, Gülcan, Lyne, Emanuel, Asadul und Nabil durchgeführt und umgesetzt.</p>
+    <p>Slogan: Teamarbeit, Harmonie und gegenseitiger Respekt.</p>
+  </div>
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
 </body>
