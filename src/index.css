@@ -1,24 +1,21 @@
+body {
+  height: 100vh;
+  background: linear-gradient(rgba(204, 196, 222, 0.5), rgba(25, 0, 108, 0.5)), url('./src/aws-bild.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Poppins', sans-serif;
+}
+
 .container {
   width: 90%;
-  max-width: 640px;
+  max-width: 800px;
   margin: auto;
-  margin-top: 150px;
-  background-image: url('path/to/your/image.jpg');
-  background-size: cover; /* Damit das Bild den gesamten Container bedeckt */
-  background-repeat: no-repeat; /* Damit das Bild nicht wiederholt wird */
+  margin-top: px;
+  background: rgba(250, 245, 245, 0.8);
   color: #262626;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 35px;
   border-radius: 10px;
   padding: 40px 50px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-body{
-height: 100vh;
-background-image: linear-gradient(#D8C7FF, #19006C);
-font-family:'poppins', sans-serif;
-}
-
-
-
