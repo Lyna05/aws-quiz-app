@@ -185,7 +185,6 @@ function Quiz() {
 
       <div className="services-container">
         <ul className="services-list">
-        <h2 style={{ color: 'black', fontWeight: 'bold' }}>Die erforderlichen Dienste zum Lernen, um das Zertifikat AWS Cloud Practitioner zu erlangen</h2>
 <li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>&#9733; <span
 className="red">Amazon EC2</span></span></li>
 <li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Amazon S3</span></span></li>
