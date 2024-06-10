@@ -1,6 +1,7 @@
 .question-number, .question-text {
   color: white;
 }
+
 .quiz-container {
   max-width: 600px;
   margin: 0 auto;
@@ -34,11 +35,11 @@
 }
 
 .quiz-container .correct-answer {
-  color: #edf3ed;
+  color: rgb(7, 146, 37);
 }
 
 .quiz-container .wrong-answer {
-  color: rgb(238, 225, 225);
+  color: rgb(193, 14, 14);
 }
 
 .navigation-buttons {
@@ -173,9 +174,7 @@
   color: rgb(255, 25, 0);
 }
 
-.result-container p {
-  color: rgb(255, 25, 0);
-}
+
 
 .services-container {
   margin-top: 20px;
@@ -194,4 +193,20 @@
 
 .bullet {
   margin-right: 5px;
+}
+
+.video-container {
+  text-align: center;
+  color: #ffffff;
+
+}
+.show-result-button {
+  display: inline-block;
+  margin-left: 20px;
+  padding: 50px 50px;
+  font-size: 20px;
+  background-color: #4343da;
+  color: rgb(9, 9, 9);
+  border: 2px;
+  cursor: pointer;
 }

@@ -152,7 +152,7 @@ function Quiz() {
 
         {currentQuestion === data.length - 1 && (
           <button onClick={handleShowResult} className="show-result-button">
-            Ergebnis anzeigen
+            Ergebnis-Anzeigen
           </button>
         )}
 

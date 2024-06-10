@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,9 +13,10 @@
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
-      background-image: url('./Aws.webp'); /* Ersetzen Sie 'Pfad-zum-Bild.jpg' durch Ihren eigenen Bildpfad */
-      background-size: cover;
-      background-position: center;
+      /* Fügen Sie das Hintergrundbild hinzu */
+      background-image: url('aws.jpg'); /* Ersetzen Sie 'Pfad-zum-Bild.jpg' durch Ihren eigenen Bildpfad */
+      background-size: cover; /* Passen Sie die Bildgröße an, um die gesamte Fläche abzudecken */
+      background-position: center; /* Passen Sie die Position des Hintergrundbildes an */
     }
 
     #overlay {
@@ -36,230 +38,22 @@
       z-index: 1;
     }
 
+    /* Modificare: Textul "APP AWS QUIZ PROJEKT" scris cu negru și font gros */
     #overlay h1 {
       color: black;
       font-weight: bold;
     }
-
-    .quiz-container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
-      text-align: center;
-    }
-
-    .quiz-container button {
-      border-radius: 10px;
-      margin: 10px 0;
-      padding: 10px 80px;
-      font-size: 12px;
-      background-color: rgb(227, 227, 251);
-      color: rgb(20, 19, 19);
-      display: block;
-    }
-
-    .quiz-container button.correct {
-      background-color: rgb(60, 218, 60);
-      color: rgb(219, 231, 219);
-    }
-
-    .quiz-container button.wrong {
-      background-color: rgb(225, 44, 44);
-      color: white;
-    }
-
-    .quiz-container p {
-      font-size: 18px;
-      margin: 15px 0;
-    }
-
-    .quiz-container .correct-answer {
-      color: #edf3ed;
-    }
-
-    .quiz-container .wrong-answer {
-      color: rgb(238, 225, 225);
-    }
-
-    .navigation-buttons {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 15px;
-    }
-
-    .prev-button,
-    .next-button {
-      font-size: 16px;
-      padding: 10px 20px;
-      margin: 0 5px;
-    }
-
-    .show-answer-button,
-    .feedback-button,
-    .random-questions-button {
-      display: inline-block;
-      margin-left: 20px;
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #4343da;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-
-    .show-answer-button:hover,
-    .feedback-button:hover,
-    .random-questions-button:hover {
-      background-color: #1f2bb1;
-    }
-
-    .full-answer p {
-      font-size: 14px;
-      margin: 10px 0;
-    }
-
-    .question-number {
-      font-size: 25px;
-      font-weight: bold;
-      margin: 10px 0;
-    }
-
-    .answer-buttons {
-      margin: 20px 0;
-    }
-
-    .answer-buttons button {
-      width: 100%;
-      max-width: 500px;
-      padding: 15px;
-      margin: 10px auto;
-      font-size: 16px;
-    }
-
-    .answer-feedback-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 20px 0;
-    }
-
-    .feedback-toggle-button {
-      display: block;
-      margin: 20px auto;
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #4343da;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-
-    .feedback-toggle-button:hover {
-      background-color: #1f2bb1;
-    }
-
-    .feedback-buttons {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .star-rating {
-      margin-top: 10px;
-    }
-
-    .star {
-      font-size: 24px;
-      cursor: pointer;
-    }
-
-    .star.selected {
-      color: gold;
-    }
-
-    .feedback-buttons span {
-      cursor: pointer;
-    }
-
-    .number-box {
-      width: 50px;
-      height: 50px;
-      border: 2px solid black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-right: 20px;
-    }
-
-    .dot-container {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 3cm;
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      grid-template-rows: repeat(5, 1fr);
-      grid-gap: 5px;
-    }
-
-    .red-bold {
-      color: red;
-      font-weight: bold;
-    }
-
-    .result-container {
-      color: rgb(255, 25, 0);
-    }
-
-    .result-container p {
-      color: rgb(255, 25, 0);
-    }
-
-    .services-container {
-      margin-top: 20px;
-    }
-
-    .services-list {
-      padding-left: 0;
-      list-style: none;
-    }
-
-    .services-list li {
-      margin-bottom: 5px;
-      font-size: 16px;
-      text-align: left;
-    }
-
-    .bullet {
-      margin-right: 5px;
-    }
-
-    /* Neue CSS-Regel für den Frage-Container */
-    .question-container {
-      background-color: rgba(0, 0, 0, 0.7); /* Hintergrundfarbe des Containers */
-      padding: 20px;
-      border-radius: 10px;
-      margin: 20px 0; /* Abstand zum Container-Rand */
-    }
-
-    .question {
-      color: white; /* Schriftfarbe der Frage */
-      margin: 0; /* Kein zusätzlicher Abstand oben/unten */
-    }
   </style>
 </head>
+
 <body>
   <div id="overlay">
-    <h1>AWS QUIZ PROJEKT APP</h1>
+    <h1> AWS QUIZ PROJEKT APP</h1>
     <p>Dieses Projekt wird von Oskar, Gülcan, Lyne, Emanuel, Asadul und Nabil durchgeführt und umgesetzt.</p>
     <p>Slogan: Teamarbeit, Harmonie und gegenseitiger Respekt.</p>
   </div>
-  <div id="root" class="quiz-container">
-    <div class="question-container">
-      <!-- Beispiel einer Frage -->
-      <p class="question">Was ist die Hauptstadt von Frankreich?</p>
-    </div>
-    <!-- Weitere Inhalte -->
-  </div>
+  <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
 </body>
+
 </html>
