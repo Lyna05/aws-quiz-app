@@ -10,6 +10,39 @@
   text-align: center;
 }
 
+.header-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.review-attempt-button,
+.restart-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #e6e6fa; /* Pastel lila Farbe */
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.review-attempt-button {
+  background-color: #e6e6fa;
+  color: white;
+}
+
+.restart-button {
+  background-color: #4caf50;
+}
+
+.timer {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: yellow; /* Gelbe Farbe */
+}
+
 .quiz-container button {
   border-radius: 10px;
   margin: 10px 0;
@@ -58,7 +91,8 @@
 
 .show-answer-button,
 .feedback-button,
-.random-questions-button {
+.random-questions-button,
+.mark-question-button {
   display: inline-block;
   margin-left: 20px;
   padding: 10px 20px;
@@ -71,7 +105,8 @@
 
 .show-answer-button:hover,
 .feedback-button:hover,
-.random-questions-button:hover {
+.random-questions-button:hover,
+.mark-question-button:hover {
   background-color: #1f2bb1;
 }
 
@@ -144,6 +179,8 @@
 
 .quiz-container {
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .number-box {
@@ -157,9 +194,8 @@
 }
 
 .dot-container {
-  position: absolute;
+  position: relative;
   top: 20px;
-  right: 20px;
   width: 3cm;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -167,13 +203,125 @@
   grid-gap: 5px;
 }
 
-.red-bold {
-  color: red;
-  font-weight: bold;
+.dot {
+  width: 30px;
+  height: 30px;
+  background-color: #ddd;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  transition: background-color 0.3s;
 }
 
-.result-container {
-  color: rgb(255, 25, 0);
+.dot.correct {
+  background-color: rgb(60, 218, 60);
+  color: rgb(219, 231, 219);
+}
+
+.dot.wrong {
+  background-color: rgb(225, 44, 44);
+  color: white;
+}
+
+.dot.current {
+  background-color: #4CAF50;
+  color: #fff;
+}
+
+.dot.marked {
+  background-color: #ffd700;
+}
+
+.dot:hover {
+  background-color: #bbb;
+  cursor: pointer;
+}
+
+.side-panel {
+  position: absolute;
+  right: 20px;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.review-attempt-button.side {
+  margin-bottom: 10px;
+}
+
+/* Feedback form styling */
+.feedback-form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.submit-feedback-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4343da;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.submit-feedback-button:hover {
+  background-color: #1f2bb1;
+}
+
+/* Modal styling */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 800px;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.review-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.review-table th,
+.review-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.review-table th {
+  background-color: #f2f2f2;
 }
 
 .services-container {
@@ -213,35 +361,13 @@
 
 .dot-container {
   position: absolute;
-  top: 20px;
+  margin-right: 28px;
+  top: 50px;
   right: 100px;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   z-index: 999;
-}
-
-.dot {
-  width: 30px;
-  height: 30px;
-  background-color: #ddd;
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 5px;
-  transition: background-color 0.3s;
-}
-
-.dot.current {
-  background-color: #4CAF50;
-  color: #fff;
-}
-
-.dot:hover {
-  background-color: #bbb;
-  cursor: pointer;
 }
 
 /* Media Queries */
@@ -304,22 +430,8 @@
     padding: 8px;
     font-size: 12px;
   }
-
-}
-.feedback-form {
-  text-align: center;
-  color: #ffffff;
-}
-.submit-feedback-button {
-  margin-top: 10px;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #4343da;
-  color: white;
-  border: none;
-  cursor: pointer;
 }
 .result-container {
   text-align: center;
-  color:#f7cb08;
+  color:rgb(7, 146, 37);
 }
