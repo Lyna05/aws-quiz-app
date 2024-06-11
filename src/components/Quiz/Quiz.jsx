@@ -8,11 +8,12 @@ function Quiz() {
   const [showAnswer, setShowAnswer] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [rating, setRating] = useState(0);
-  const [showStars, setShowStars] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [showTempResult, setShowTempResult] = useState(false);
   const [shuffledQuestions, setShuffledQuestions] = useState([]);
   const [isRandomMode, setIsRandomMode] = useState(false);
+  const [feedback, setFeedback] = useState("");
+  const [showFeedbackForm, setShowFeedbackForm] = useState(false);
 
   useEffect(() => {
     if (showResult) {
@@ -60,12 +61,8 @@ function Quiz() {
     setSelectedOption(null);
   };
 
-  const handleFeedback = () => {
-    setShowStars(!showStars);
-  };
-
-  const handleRating = (rate) => {
-    setRating(rate);
+  const handleFeedbackToggle = () => {
+    setShowFeedbackForm(!showFeedbackForm);
   };
 
   const handleShowResult = () => {
@@ -79,6 +76,34 @@ function Quiz() {
     setCurrentQuestion(shuffled[0]);
   };
 
+  const handleQuestionClick = (index) => {
+    setCurrentQuestion(index);
+    setShowAnswer(false);
+    setSelectedOption(null);
+  };
+
+  const handleRating = (rate) => {
+    setRating(rate);
+  };
+
+  const handleFeedbackSubmit = async () => {
+    const feedbackContent = `Rating: ${rating} stars\nFeedback: ${feedback}`;
+    console.log("Feedback submitted:", feedbackContent);
+    
+    // Placeholder for sending the email
+    await sendEmail(feedbackContent);
+
+    setFeedback("");
+    setRating(0);
+    alert("Vielen Dank für Ihr Feedback!");
+  };
+
+  const sendEmail = async (content) => {
+    // Placeholder function to simulate sending an email
+    // You would replace this with an actual email sending service or backend API call
+    console.log("Sending email with content:", content);
+  };
+
   const question = isRandomMode ? data[shuffledQuestions[currentQuestion]] : data[currentQuestion];
   const totalQuestions = data.length;
   const accuracy = (correctAnswers / totalQuestions) * 100;
@@ -87,7 +112,7 @@ function Quiz() {
     <div className="quiz-container">
       <div className="quiz-content">
         <p className="question-number">Frage {currentQuestion + 1} von {totalQuestions}</p>
-        <p className="question-text">{question.question}</p> {/* Textul întrebării */}
+        <p className="question-text">{question.question}</p>
         <div className="answer-buttons">
           <button
             onClick={() => handleOptionClick(1)}
@@ -122,7 +147,7 @@ function Quiz() {
 
         <div className="answer-feedback-container">
           <button onClick={handleShowAnswer} className="quiz-button">Antwort-Anzeigen</button>
-          <button onClick={handleFeedback} className="quiz-button">Feedback-Senden</button>
+          <button onClick={handleFeedbackToggle} className="quiz-button">Feedback-Senden</button>
           <button onClick={handleRandomQuestions} className="quiz-button">Random-Fragen</button>
         </div>
 
@@ -136,17 +161,28 @@ function Quiz() {
           </div>
         )}
 
-        {showStars && (
-          <div className="star-rating">
-            {[...Array(5)].map((_, index) => (
-              <span
-                key={index}
-                className={index < rating ? 'star selected' : 'star'}
-                onClick={() => handleRating(index + 1)}
-              >
-                &#9733;
-              </span>
-            ))}
+        {showFeedbackForm && (
+          <div className="feedback-form">
+            <h3>Feedback</h3>
+            <textarea
+              value={feedback}
+              onChange={(e) => setFeedback(e.target.value)}
+              placeholder="Schreiben Sie bitte hier Ihr Feedback..."
+              rows="4"
+              cols="50"
+            ></textarea>
+            <div className="star-rating">
+              {[...Array(5)].map((_, index) => (
+                <span
+                  key={index}
+                  className={index < rating ? 'star selected' : 'star'}
+                  onClick={() => handleRating(index + 1)}
+                >
+                  &#9733;
+                </span>
+              ))}
+            </div>
+            <button onClick={handleFeedbackSubmit} className="submit-feedback-button">Senden</button>
           </div>
         )}
 
@@ -171,8 +207,14 @@ function Quiz() {
       </div>
 
       <div className="dot-container">
-        {[...Array(25)].map((_, index) => (
-          <div key={index} className="dot"></div>
+        {[...Array(totalQuestions)].map((_, index) => (
+          <div
+            key={index}
+            className={`dot ${index === currentQuestion ? 'current' : ''}`}
+            onClick={() => handleQuestionClick(index)}
+          >
+            {index + 1}
+          </div>
         ))}
       </div>
 
