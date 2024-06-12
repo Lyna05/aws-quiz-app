@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { data } from '../../assets/data';
-import { correctInfo } from '../../assets/correctInfo';
-import './Quiz.css';
+import { data } from '../assets/data.js';
+import { correctInfo } from '../assets/correctInfo.js';
+import '../Quiz.css';
 
-function Quiz() {
+console.log(data); // Debug-Ausgabe
+console.log(correctInfo); // Debug-Ausgabe
+
+const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [showAnswer, setShowAnswer] = useState(false);
@@ -16,10 +19,10 @@ function Quiz() {
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
   const [markedQuestions, setMarkedQuestions] = useState([]);
-  const [timeLeft, setTimeLeft] = useState(40 * 60); // 40 minutes in seconds
+  const [timeLeft, setTimeLeft] = useState(40 * 60); // 40 Minuten in Sekunden
   const [timerActive, setTimerActive] = useState(true);
-  const [showReviewModal, setShowReviewModal] = useState(false); // State for review modal
-  const [showMarkedQuestionsModal, setShowMarkedQuestionsModal] = useState(false); // State for marked questions modal
+  const [showReviewModal, setShowReviewModal] = useState(false); // Status für Überprüfungsmodal
+  const [showMarkedQuestionsModal, setShowMarkedQuestionsModal] = useState(false); // Status für markierte Fragenmodal
 
   const timerRef = useRef(null);
 
@@ -45,7 +48,7 @@ function Quiz() {
   }, [timerActive]);
 
   const playSound = () => {
-    const audio = new Audio('/path/to/sound.mp3'); // Add the path to your sound file
+    const audio = new Audio('/path/to/sound.mp3'); // Pfad zu Ihrer Sounddatei
     audio.play();
   };
 
@@ -119,8 +122,8 @@ function Quiz() {
   const handleFeedbackSubmit = async () => {
     const feedbackContent = `Rating: ${rating} stars\nFeedback: ${feedback}`;
     console.log("Feedback submitted:", feedbackContent);
-    
-    // Placeholder for sending the email
+
+    // Platzhalter für das Senden der E-Mail
     await sendEmail(feedbackContent);
 
     setFeedback("");
@@ -129,8 +132,8 @@ function Quiz() {
   };
 
   const sendEmail = async (content) => {
-    // Placeholder function to simulate sending an email
-    // You would replace this with an actual email sending service or backend API call
+    // Platzhalterfunktion, um das Senden einer E-Mail zu simulieren
+    // Sie würden dies durch einen tatsächlichen E-Mail-Sendedienst oder einen Backend-API-Aufruf ersetzen
     console.log("Sending email with content:", content);
   };
 
@@ -147,8 +150,8 @@ function Quiz() {
     setShowFeedbackForm(false);
     setAnsweredQuestions([]);
     setMarkedQuestions([]);
-    setTimeLeft(40 * 60); // Reset timer
-    setTimerActive(true); // Start timer on restart
+    setTimeLeft(40 * 60); // Timer zurücksetzen
+    setTimerActive(true); // Timer beim Neustart starten
   };
 
   const handleMarkQuestion = () => {
@@ -338,7 +341,7 @@ function Quiz() {
                   <tr key={index}>
                     <td>{index + 1}</td>
                     <td>{q.question}</td>
-                    <td>{answeredQuestions.find(a => a.question === index) ? answeredQuestions.find(a => a.question === index).isCorrect ? 'Correct' : 'Wrong' : 'Unanswered'}</td>
+                    <td>{answeredQuestions.find(a => a.question === index) ? answeredQuestions.find(a => a.question === index).isCorrect ? 'Richtig' : 'Falsch' : 'keine Antwort'}</td>
                     <td><button onClick={() => handleQuestionClick(index)}>Öffnen</button></td>
                   </tr>
                 ))}

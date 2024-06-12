@@ -1,12 +1,23 @@
 import React from 'react';
-import Quiz from './components/Quiz/Quiz';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import Amplify from 'aws-amplify';
+import awsconfig from './aws-exports';
+import Quiz from './components/Quiz';
+import Login from './components/Login';
+import PrivateRoute from './components/PrivateRoute';
 
-function App() {
+Amplify.configure(awsconfig);
+
+const App = () => {
   return (
-    <div className="App">
-      <Quiz />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/quiz" element={<PrivateRoute component={Quiz} />} />
+        <Route path="*" element={<Navigate to="/login" />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
