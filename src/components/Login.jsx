@@ -1,50 +1,51 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './Login.css';
 import { Auth } from 'aws-amplify';
-import { useHistory } from 'react-router-dom';
-import './Login.css'; // Importieren Sie die CSS-Datei
 
-const Login = () => {
+function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await Auth.signIn(email, password);
-      history.push('/quiz');
+     await Auth.signIn(email, password);
+      navigate('/quiz');
     } catch (error) {
-      console.log('error signing in', error);
-      alert('Login failed, please try again.');
+      console.error("Error signing in", error);
     }
   };
 
   return (
     <div className="login-container">
+      <h2>Login</h2>
       <form onSubmit={handleLogin}>
-        <h2>Login</h2>
         <div className="input-container">
-          <label>Email</label>
-          <input 
-            type="email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
-            required 
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
           />
         </div>
         <div className="input-container">
-          <label>Password</label>
-          <input 
-            type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            required 
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
           />
         </div>
         <button type="submit" className="login-button">Login</button>
       </form>
     </div>
   );
-};
+}
 
 export default Login;

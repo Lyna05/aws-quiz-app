@@ -6,7 +6,7 @@ import '../Quiz.css';
 console.log(data); // Debug-Ausgabe
 console.log(correctInfo); // Debug-Ausgabe
 
-const Quiz = () => {
+function Quiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [showAnswer, setShowAnswer] = useState(false);
