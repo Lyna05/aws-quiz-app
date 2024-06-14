@@ -2,7 +2,7 @@ module.exports = {
   root: true,
   env: {
     browser: true,
-    es2020: true
+    es2021: true
   },
   extends: [
     'eslint:recommended',
@@ -12,12 +12,15 @@ module.exports = {
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: {
+    ecmaFeatures: {
+      jsx: true
+    },
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
   settings: {
     react: {
-      version: '18.2'
+      version: 'detect'
     }
   },
   plugins: ['react-refresh'],

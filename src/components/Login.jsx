@@ -1,51 +1,37 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Login.css';
 import { Auth } from 'aws-amplify';
 
-function Login() {
-  const [email, setEmail] = useState('');
+const Login = () => {
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-     await Auth.signIn(email, password);
-      navigate('/quiz');
+      await Auth.signIn(username, password);
+      window.location.href = '/dashboard';
     } catch (error) {
-      console.error("Error signing in", error);
+      console.error('Error logging in:', error);
     }
   };
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <div className="input-container">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-          />
-        </div>
-        <div className="input-container">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-          />
-        </div>
-        <button type="submit" className="login-button">Login</button>
-      </form>
-    </div>
+    <form onSubmit={handleLogin}>
+      <input
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button type="submit">Login</button>
+    </form>
   );
-}
+};
 
 export default Login;
