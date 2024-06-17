@@ -5,18 +5,38 @@ import PropTypes from 'prop-types';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const [isPasswordChangeRequired, setIsPasswordChangeRequired] = useState(false);
 
   useEffect(() => {
-    Auth.currentAuthenticatedUser()
-      .then(() => setIsAuthenticated(true))
-      .catch(() => setIsAuthenticated(false));
+    const checkUser = async () => {
+      try {
+        const user = await Auth.currentAuthenticatedUser();
+        console.log('Current authenticated user:', user);
+        
+        // Überprüfen, ob der Benutzer sein Passwort ändern muss
+        if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
+          setIsPasswordChangeRequired(true);
+        } else {
+          setIsAuthenticated(true);
+        }
+      } catch (err) {
+       
+        setIsAuthenticated(false);
+      }
+    };
+
+    checkUser();
   }, []);
 
   if (isAuthenticated === null) {
     return <div>Loading...</div>;
   }
 
-  return isAuthenticated ? <Component {...rest} /> : <Navigate to="/login" />;
+  if (isPasswordChangeRequired) {
+    return <Navigate to="/change-password" />;
+  }
+
+  return isAuthenticated ? <Component {...rest} /> : null; // Deine bestehende 28. Zeile bleibt unverändert
 };
 
 PrivateRoute.propTypes = {
