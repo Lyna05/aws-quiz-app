@@ -1,5 +1,6 @@
 export const data = [
   {
+    
     question: "Welcher AWS-Service bietet einen vollständig verwalteten NoSQL-Datenbankdienst?",
     option1: "Amazon S3",
     option2: "Amazon RDS",
