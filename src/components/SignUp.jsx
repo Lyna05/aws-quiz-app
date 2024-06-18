@@ -6,6 +6,7 @@ import './SignUp.css';
 const SignUp = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
@@ -19,7 +20,7 @@ const SignUp = () => {
     }
     try {
       await Auth.signUp({
-        username: email, // Using email as the username
+        username, // Use separate username field
         password,
         attributes: {
           email,
@@ -28,7 +29,7 @@ const SignUp = () => {
       setSuccess('Sign up successful. Please check your email to confirm your account.');
       setTimeout(() => navigate('/login'), 3000); // Navigate to login after 3 seconds
     } catch (err) {
-      setError('Sign up failed. Please try again.');
+      setError(`Sign up failed: ${err.message}`);
     }
   };
 
@@ -43,6 +44,16 @@ const SignUp = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label>Benutzername</label>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
             />
           </div>
           <div>
@@ -51,6 +62,7 @@ const SignUp = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
           <div>
@@ -59,6 +71,7 @@ const SignUp = () => {
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              required
             />
           </div>
           {error && <p style={{ color: 'red' }}>{error}</p>}

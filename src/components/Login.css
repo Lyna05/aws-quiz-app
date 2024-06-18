@@ -1,3 +1,17 @@
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8f9fa; /* Light background color for the page */
+}
+
+.welcome-text {
+  margin-top: 20px;
+  font-size: 24px;
+  color: #333; /* Text color */
+}
+
 .login-container {
   display: flex;
   flex-direction: column;
@@ -45,6 +59,7 @@ input {
 .login-button:hover {
   background-color: #0056b3;
 }
+
 .sign-up-button {
   margin-top: 20px;
   padding: 10px;
@@ -57,4 +72,26 @@ input {
 
 .sign-up-button:hover {
   background-color: #0056b3;
+}
+
+.login-links {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.forgot-password-link {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.forgot-password-link:hover {
+  text-decoration: underline;
+}
+
+p {
+  margin: 0;
 }
