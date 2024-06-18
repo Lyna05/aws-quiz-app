@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Auth } from 'aws-amplify';
 import { useNavigate } from 'react-router-dom';
+import './ChangePassword.css';
 
 const ChangePassword = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const ChangePassword = () => {
       const user = await Auth.currentAuthenticatedUser();
       await Auth.changePassword(user, oldPassword, newPassword);
       setSuccess('Password changed successfully.');
-      setTimeout(() => navigate('/dashboard'), 2000); // Nach erfolgreichem Passwortwechsel zum Dashboard navigieren
+      setTimeout(() => navigate('/dashboard'), 2000);
     } catch (err) {
       setError('Failed to change password. Please try again.');
     }
@@ -26,7 +27,7 @@ const ChangePassword = () => {
       <h2>Change Password</h2>
       <form onSubmit={handleChangePassword}>
         <div>
-          <label>Old Password</label>
+          <label>Altes Passwort</label>
           <input
             type="password"
             value={oldPassword}
@@ -34,7 +35,7 @@ const ChangePassword = () => {
           />
         </div>
         <div>
-          <label>New Password</label>
+          <label>Neues Passwort</label>
           <input
             type="password"
             value={newPassword}
@@ -43,7 +44,7 @@ const ChangePassword = () => {
         </div>
         {error && <p style={{ color: 'red' }}>{error}</p>}
         {success && <p style={{ color: 'green' }}>{success}</p>}
-        <button type="submit">Change Password</button>
+        <button type="submit">Passwort Ändern</button>
       </form>
     </div>
   );

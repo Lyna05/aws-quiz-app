@@ -13,7 +13,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await Auth.signIn(username, password);
-      navigate('/dashboard'); // Navigiere zum Dashboard nach erfolgreichem Login
+      navigate('/quiz'); 
     } catch (err) {
       setError('Login failed. Please check your credentials.');
     }
