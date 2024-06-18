@@ -13,7 +13,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await Auth.signIn(username, password);
-      navigate('/quiz'); 
+      navigate('/dashboard'); // Navigiere zum Dashboard nach erfolgreichem Login
     } catch (err) {
       setError('Login failed. Please check your credentials.');
     }
@@ -24,7 +24,7 @@ const Login = () => {
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div className="input-container">
-          <label>Username</label>
+          <label>Email</label>
           <input
             type="text"
             value={username}
@@ -42,6 +42,14 @@ const Login = () => {
         {error && <p style={{ color: 'red' }}>{error}</p>}
         <button type="submit" className="login-button">Login</button>
       </form>
+      <div className="login-links">
+        <button onClick={() => navigate('/sign-up')} className="sign-up-button">
+          Sign Up
+        </button>
+        <button onClick={() => navigate('/forgot-password')} className="forgot-password-link">
+          Forgot Password?
+        </button>
+      </div>
     </div>
   );
 };

@@ -23,29 +23,34 @@ const ChangePassword = () => {
   };
 
   return (
-    <div>
-      <h2>Change Password</h2>
-      <form onSubmit={handleChangePassword}>
-        <div>
-          <label>Altes Passwort</label>
-          <input
-            type="password"
-            value={oldPassword}
-            onChange={(e) => setOldPassword(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Neues Passwort</label>
-          <input
-            type="password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-          />
-        </div>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        {success && <p style={{ color: 'green' }}>{success}</p>}
-        <button type="submit">Passwort Ändern</button>
-      </form>
+    <div className="change-password-page">
+      <div className="change-password-container">
+        <h2>Change Password</h2>
+        <form onSubmit={handleChangePassword}>
+          <div>
+            <label>Altes Passwort</label>
+            <input
+              type="password"
+              value={oldPassword}
+              onChange={(e) => setOldPassword(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Neues Passwort</label>
+            <input
+              type="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+          </div>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          {success && <p style={{ color: 'green' }}>{success}</p>}
+          <button type="submit">Passwort Ändern</button>
+        </form>
+        <button onClick={() => navigate('/sign-up')} className="sign-up-button">
+          Sign Up
+        </button>
+      </div>
     </div>
   );
 };
