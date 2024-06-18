@@ -295,7 +295,11 @@
   border-radius: 8px;
   width: 80%;
   max-width: 800px;
+  max-height: 70vh; /* Set the maximum height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  position: relative; /* Ensure the close button positions correctly */
 }
+
 
 .close-modal {
   position: absolute;
