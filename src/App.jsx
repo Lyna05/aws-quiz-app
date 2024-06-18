@@ -6,8 +6,7 @@ import Dashboard from './Dashboard';
 import PrivateRoute from './PrivateRoute';
 import ChangePassword from './components/ChangePassword';
 import Quiz from './components/Quiz/Quiz';
-import SignUp from './components/SignUp';
-import ForgotPassword from './components/ForgotPassword'; // Importiere die ForgotPassword-Komponente
+import SignUp from './components/SignUp'; // Importiere die SignUp-Komponente
 
 const App = () => (
   <Router>
@@ -15,9 +14,8 @@ const App = () => (
       <Route path="/login" element={<Login />} />
       <Route path="/dashboard" element={<PrivateRoute component={Dashboard} />} />
       <Route path="/change-password" element={<ChangePassword />} />
-      <Route path="/quiz" element={<PrivateRoute component={Quiz} />} />
-      <Route path="/sign-up" element={<SignUp />} />
-      <Route path="/forgot-password" element={<ForgotPassword />} /> 
+      <Route path="/quiz" element={<Quiz />} /> 
+      <Route path="/sign-up" element={<SignUp />} /> 
       <Route path="/" element={<Home />} />
     </Routes>
   </Router>
