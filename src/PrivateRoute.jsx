@@ -20,6 +20,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
           setIsAuthenticated(true);
         }
       } catch (err) {
+        console.error('No current user', err);
        
         setIsAuthenticated(false);
       }

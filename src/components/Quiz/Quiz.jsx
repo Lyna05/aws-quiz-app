@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { data } from '../assets/data.js';
-import { correctInfo } from '../assets/correctInfo.js';
-import '../Quiz.css';
+import { data } from '../../assets/data';
+import { correctInfo } from '../../assets/correctInfo';
+import './Quiz.css';
 
 console.log(data); // Debug-Ausgabe
 console.log(correctInfo); // Debug-Ausgabe
