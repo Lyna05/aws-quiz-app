@@ -1,84 +1,117 @@
 import React, { useState } from 'react';
 import { Auth } from 'aws-amplify';
+import awsconfig from '../aws-exports';
+import Amplify from 'aws-amplify';
 import { useNavigate } from 'react-router-dom';
-import './SignUp.css';
+
+// Configure Amplify
+Amplify.configure(awsconfig);
 
 const SignUp = () => {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+    email: '',
+    phone_number: ''
+  });
+  const [confirmationCode, setConfirmationCode] = useState('');
+  const [isConfirming, setIsConfirming] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate(); // Updated to use useNavigate
 
-  const handleSignUp = async (e) => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      setError('Passwords do not match.');
-      return;
-    }
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSignUp = async (event) => {
+    event.preventDefault();
+    const { username, password, email, phone_number } = formData;
     try {
       await Auth.signUp({
-        username, // Use separate username field
+        username,
         password,
         attributes: {
           email,
-        },
+          phone_number
+        }
       });
-      setSuccess('Sie haben sich erfolgreich registriert, Please check your email to confirm your account.');
-      setTimeout(() => navigate('/login'), 3000); // Navigate to login after 3 seconds
-    } catch (err) {
-      setError(`Sign up failed: ${err.message}`);
+      setIsConfirming(true);
+    } catch (error) {
+      setErrorMessage(error.message || 'Error signing up');
+    }
+  };
+
+  const handleConfirmSignUp = async (event) => {
+    event.preventDefault();
+    const { username } = formData;
+    try {
+      await Auth.confirmSignUp(username, confirmationCode);
+      console.log('User confirmed');
+      navigate('/'); // Redirect to login page after successful confirmation
+    } catch (error) {
+      setErrorMessage(error.message || 'Error confirming sign up');
     }
   };
 
   return (
-    <div className="sign-up-page">
-      <div className="sign-up-container">
-        <h2>Registrieren</h2>
-        <form onSubmit={handleSignUp}>
-          <div>
-            <label>Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label>Benutzername</label>
+    <div className="sign-up-container">
+      {isConfirming ? (
+        <form onSubmit={handleConfirmSignUp}>
+          <label>
+            Confirmation Code:
             <input
               type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
+              name="confirmationCode"
+              value={confirmationCode}
+              onChange={(e) => setConfirmationCode(e.target.value)}
             />
-          </div>
-          <div>
-            <label>Passwort</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label>Bestätigen Sie Ihren Passwort</label>
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-          </div>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-          {success && <p style={{ color: 'green' }}>{success}</p>}
-          <button type="submit">Registrieren</button>
+          </label>
+          <button type="submit">Confirm Sign Up</button>
+          {errorMessage && <p>{errorMessage}</p>}
         </form>
-      </div>
+      ) : (
+        <form onSubmit={handleSignUp}>
+          <label>
+            Username:
+            <input
+              type="text"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Password:
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Email:
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Phone Number:
+            <input
+              type="tel"
+              name="phone_number"
+              value={formData.phone_number}
+              onChange={handleChange}
+            />
+          </label>
+          <button type="submit">Sign Up</button>
+          {errorMessage && <p>{errorMessage}</p>}
+        </form>
+      )}
     </div>
   );
 };

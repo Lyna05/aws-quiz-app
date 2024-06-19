@@ -15,7 +15,7 @@
   height: auto; /* Adjusted height */
   background-color: #73b4d0; /* Updated background color */
   width: 90%; /* Use percentage for responsiveness */
-  max-width: 600px; /* Set a max width */
+  max-width: 500px; /* Set a max width */
   padding: 20px; /* Adjusted padding for smaller screens */
   border: 1px solid #ccc;
   border-radius: 10px;
