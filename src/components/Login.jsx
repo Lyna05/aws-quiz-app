@@ -3,6 +3,8 @@ import { Auth } from 'aws-amplify';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
+
+
 const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
@@ -49,6 +51,7 @@ const Login = () => {
       setError('Das Zurücksetzen des Passworts ist fehlgeschlagen, bitte versuchen Sie es erneut.');
     }
   };
+  
 
   return (
     <div className="login-page">
