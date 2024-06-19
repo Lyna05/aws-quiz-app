@@ -5,7 +5,7 @@
   justify-content: center; /* Center the content vertically */
   height: 100vh;
   background-color: #48719a;
-  
+  background-image: url('');
   background-color: #1d5189; /* Light background color for the page */
   background-size: cover; /* Ensure the background image covers the whole page */
 }
@@ -18,7 +18,7 @@
   height: 60vh;
   background-color: #73b4d0;
   width: 600px; /* Increased width for larger container */
-  padding: 40px; /* Increased padding for more internal space */
+  padding: 70px; /* Increased padding for more internal space */
   border: 1px solid #ccc;
   border-radius: 10px;
   text-align: center;
@@ -26,7 +26,7 @@
 
 h1.welcome-text {
   margin-bottom: 20px;
-  color: #333; /* Dark text */
+  color: #333333; /* Dark text */
 }
 
 form {
