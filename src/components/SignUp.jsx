@@ -3,13 +3,14 @@ import { Auth } from 'aws-amplify';
 import { useNavigate } from 'react-router-dom';
 import './SignUp.css';
 
-
 const SignUp = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmationCode, setConfirmationCode] = useState('');
+  const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
@@ -21,16 +22,27 @@ const SignUp = () => {
     }
     try {
       await Auth.signUp({
-        username, // Use separate username field
+        username,
         password,
         attributes: {
           email,
         },
       });
+      setShowModal(true); // Show modal after successful sign-up
       setSuccess('Sie haben sich erfolgreich registriert, Please check your email to confirm your account.');
-      setTimeout(() => navigate('/login'), 3000); // Navigate to login after 3 seconds
     } catch (err) {
       setError(`Sign up failed: ${err.message}`);
+    }
+  };
+
+  const handleConfirmSignUp = async (e) => {
+    e.preventDefault();
+    try {
+      await Auth.confirmSignUp(username, confirmationCode);
+      setShowModal(false); // Hide modal after successful confirmation
+      navigate('/'); // Redirect to login page
+    } catch (err) {
+      setError(`Confirmation failed: ${err.message}`);
     }
   };
 
@@ -80,6 +92,27 @@ const SignUp = () => {
           <button type="submit">Registrieren</button>
         </form>
       </div>
+
+      {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={() => setShowModal(false)}>&times;</span>
+            <form onSubmit={handleConfirmSignUp}>
+              <label>
+                Bestätigungscode:
+                <input
+                  type="text"
+                  value={confirmationCode}
+                  onChange={(e) => setConfirmationCode(e.target.value)}
+                  required
+                />
+              </label>
+              <button type="submit">Bestätigen</button>
+              {error && <p style={{ color: 'red' }}>{error}</p>}
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
