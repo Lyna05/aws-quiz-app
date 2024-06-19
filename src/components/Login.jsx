@@ -15,13 +15,13 @@ const Login = () => {
       await Auth.signIn(username, password);
       navigate('/quiz'); // Navigiere zum Quiz nach erfolgreichem Login
     } catch (err) {
-      setError('Login failed. Please check your credentials.');
+      setError('Einloggen hat nicht geklappt, bitte versuchen Sie es nochmal.');
     }
   };
 
   return (
     <div className="login-container">
-      <h2>Login</h2>
+      <h2>Einloggen</h2>
       <form onSubmit={handleSubmit}>
         <div className="input-container">
           <label>Email</label>
@@ -32,7 +32,7 @@ const Login = () => {
           />
         </div>
         <div className="input-container">
-          <label>Password</label>
+          <label>Passwort</label>
           <input
             type="password"
             value={password}
@@ -44,10 +44,10 @@ const Login = () => {
       </form>
       <div className="login-links">
         <button onClick={() => navigate('/sign-up')} className="sign-up-button">
-          Sign Up
+          Registrieren
         </button>
         <button onClick={() => navigate('/forgot-password')} className="forgot-password-link">
-          Forgot Password?
+          Passwort vergessen?
         </button>
       </div>
     </div>

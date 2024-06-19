@@ -25,7 +25,7 @@ const SignUp = () => {
           email,
         },
       });
-      setSuccess('Sign up successful. Please check your email to confirm your account.');
+      setSuccess('Sie haben sich erfolgreich registriert, Please check your email to confirm your account.');
       setTimeout(() => navigate('/login'), 3000); // Navigate to login after 3 seconds
     } catch (err) {
       setError('Sign up failed. Please try again.');
@@ -35,7 +35,7 @@ const SignUp = () => {
   return (
     <div className="sign-up-page">
       <div className="sign-up-container">
-        <h2>Sign Up</h2>
+        <h2>Registrieren</h2>
         <form onSubmit={handleSignUp}>
           <div>
             <label>Email</label>
@@ -46,7 +46,7 @@ const SignUp = () => {
             />
           </div>
           <div>
-            <label>Password</label>
+            <label>Passwort</label>
             <input
               type="password"
               value={password}
@@ -54,7 +54,7 @@ const SignUp = () => {
             />
           </div>
           <div>
-            <label>Confirm Password</label>
+            <label>Bestätigen Sie Ihren Passwort</label>
             <input
               type="password"
               value={confirmPassword}
@@ -63,7 +63,7 @@ const SignUp = () => {
           </div>
           {error && <p style={{ color: 'red' }}>{error}</p>}
           {success && <p style={{ color: 'green' }}>{success}</p>}
-          <button type="submit">Sign Up</button>
+          <button type="submit">Registrieren</button>
         </form>
       </div>
     </div>
