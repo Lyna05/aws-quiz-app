@@ -8,7 +8,6 @@
   background-image: url('');
   background-color: #1d5189; /* Light background color for the page */
   background-size: cover; /* Ensure the background image covers the whole page */
-  
 }
 
 .login-container {
@@ -16,7 +15,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 60vh;
+  height: 60vh; /* Combined from the second set */
   background-color: #73b4d0;
   width: 90%; /* Use percentage for responsiveness */
   max-width: 600px; /* Set a max width */
@@ -26,7 +25,31 @@
   text-align: center;
 }
 
+/* Adjust padding for larger screens */
+@media (min-width: 600px) {
+  .login-container {
+    padding: 40px;
+  }
 
+  .login-button,
+  .sign-up-button {
+    padding: 15px;
+  }
+}
+
+/* Adjust width for tablets */
+@media (min-width: 768px) {
+  .login-container {
+    width: 80%;
+  }
+}
+
+/* Fixed width for larger screens */
+@media (min-width: 1024px) {
+  .login-container {
+    width: 600px;
+  }
+}
 
 form {
   display: flex;
@@ -36,6 +59,11 @@ form {
   border: 1px solid #ccc;
   border-radius: 10px;
   background-color: white;
+}
+
+h1 {
+  color: white;
+  margin-bottom: 20px;
 }
 
 h2 {
@@ -90,31 +118,4 @@ input {
 
 .forgot-password-link:hover {
   text-decoration: underline;
-}
-
-/* Media Queries for Responsiveness */
-@media (min-width: 600px) {
-  .login-container {
-    padding: 40px; /* Increase padding for larger screens */
-  }
-
-  .login-button {
-    padding: 15px;
-  }
-
-  .sign-up-button {
-    padding: 15px;
-  }
-}
-
-@media (min-width: 768px) {
-  .login-container {
-    width: 80%; /* Adjust width for tablets */
-  }
-}
-
-@media (min-width: 1024px) {
-  .login-container {
-    width: 600px; /* Fixed width for larger screens */
-  }
 }

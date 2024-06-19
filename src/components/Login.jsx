@@ -51,81 +51,84 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <h2>Einloggen</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="input-container">
-          <label>Benutzername</label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-        <div className="input-container">
-          <label>Passwort</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit" className="login-button">Einloggen</button>
-      </form>
-      <div className="login-links">
-        <button onClick={() => navigate('/sign-up')} className="sign-up-button">
-          Registrieren
-        </button>
-        <button onClick={() => setShowForgotPasswordModal(true)} className="forgot-password-link">
-          Passwort vergessen?
-        </button>
-      </div>
-
-      {showForgotPasswordModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={() => setShowForgotPasswordModal(false)}>&times;</span>
-            {!isConfirming ? (
-              <form onSubmit={handleForgotPasswordSubmit}>
-                <label>
-                  Geben Sie Ihre Email ein:
-                  <input
-                    type="email"
-                    value={forgotPasswordEmail}
-                    onChange={(e) => setForgotPasswordEmail(e.target.value)}
-                    required
-                  />
-                </label>
-                <button type="submit">Code senden</button>
-              </form>
-            ) : (
-              <form onSubmit={handleResetPasswordSubmit}>
-                <label>
-                  Bestätigungscode:
-                  <input
-                    type="text"
-                    value={confirmationCode}
-                    onChange={(e) => setConfirmationCode(e.target.value)}
-                    required
-                  />
-                </label>
-                <label>
-                  Neues Passwort:
-                  <input
-                    type="password"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    required
-                  />
-                </label>
-                <button type="submit">Passwort zurücksetzen</button>
-              </form>
-            )}
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+    <div className="login-page">
+      <h1>Willkommen bei der AWS Quiz Master App</h1>
+      <div className="login-container">
+        <h2>Einloggen</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="input-container">
+            <label>Benutzername</label>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
           </div>
+          <div className="input-container">
+            <label>Passwort</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          <button type="submit" className="login-button">Einloggen</button>
+        </form>
+        <div className="login-links">
+          <button onClick={() => navigate('/sign-up')} className="sign-up-button">
+            Registrieren
+          </button>
+          <button onClick={() => setShowForgotPasswordModal(true)} className="forgot-password-link">
+            Passwort vergessen?
+          </button>
         </div>
-      )}
+
+        {showForgotPasswordModal && (
+          <div className="modal">
+            <div className="modal-content">
+              <span className="close" onClick={() => setShowForgotPasswordModal(false)}>&times;</span>
+              {!isConfirming ? (
+                <form onSubmit={handleForgotPasswordSubmit}>
+                  <label>
+                    Geben Sie Ihre Email ein:
+                    <input
+                      type="email"
+                      value={forgotPasswordEmail}
+                      onChange={(e) => setForgotPasswordEmail(e.target.value)}
+                      required
+                    />
+                  </label>
+                  <button type="submit">Code senden</button>
+                </form>
+              ) : (
+                <form onSubmit={handleResetPasswordSubmit}>
+                  <label>
+                    Bestätigungscode:
+                    <input
+                      type="text"
+                      value={confirmationCode}
+                      onChange={(e) => setConfirmationCode(e.target.value)}
+                      required
+                    />
+                  </label>
+                  <label>
+                    Neues Passwort:
+                    <input
+                      type="password"
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      required
+                    />
+                  </label>
+                  <button type="submit">Passwort zurücksetzen</button>
+                </form>
+              )}
+              {error && <p style={{ color: 'red' }}>{error}</p>}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
