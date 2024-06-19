@@ -1,60 +1,63 @@
 .sign-up-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50vh;
-    background-color: #2c3e50; /* Dunkler Hintergrund */
-  }
-  
-  .sign-up-container {
-    max-width: 400px;
-    margin: 100px auto;
-    padding: 80px;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    background-color:white; 
-    text-align: center;
-    
-  }
-  
-  .sign-up-container h2 {
-    margin-bottom: 20px;
-    color:black; /* Textfarbe weiß */
-  }
-  
-  .sign-up-container form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .sign-up-container label {
-    display: block;
-    margin-bottom: 5px;
-    color: white; /* Textfarbe weiß */
-    text-align: left;
-  }
-  
-  .sign-up-container input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: whitesmoke; /* Dunkleres Eingabefeld */
-    color: white; /* Textfarbe weiß */
-  }
-  
-  .sign-up-container button {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .sign-up-container button:hover {
-    background-color: #45a049;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #2c3e50; /* Dunkler Hintergrund */
+}
+
+.sign-up-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh; /* Înălțime ajustată */
+  background-color: #73b4d0; /* Culoare de fundal actualizată */
+  width: 600px; /* Lățime mărită pentru un container mai mare */
+  padding: 40px; /* Pătrare mărită pentru mai mult spațiu intern */
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.sign-up-container h2 {
+  margin-bottom: 20px;
+  color: #333; /* Text întunecat */
+}
+
+.sign-up-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Spațiere mărită între elemente */
+  width: 100%; /* Asigură că formularul ocupă toată lățimea containerului */
+}
+
+.sign-up-container label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333; /* Text întunecat */
+  text-align: left;
+}
+
+.sign-up-container input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9; /* Helleres Eingabefeld */
+  color: #333; /* Dunkler Text */
+}
+
+.sign-up-container button {
+  width: 100%;
+  padding: 15px; /* Pătrare mărită pentru un buton mai mare */
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sign-up-container button:hover {
+  background-color: #45a049;
+}

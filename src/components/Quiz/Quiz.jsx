@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { data } from '../../assets/data';
 import { correctInfo } from '../../assets/correctInfo';
+import { Auth } from 'aws-amplify';
+import { useNavigate } from 'react-router-dom';
 import './Quiz.css';
 
 console.log(data); // Debug-Ausgabe
@@ -25,6 +27,7 @@ function Quiz() {
   const [showMarkedQuestionsModal, setShowMarkedQuestionsModal] = useState(false); // Status für markierte Fragenmodal
 
   const timerRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (timerActive) {
@@ -178,6 +181,15 @@ function Quiz() {
     setShowMarkedQuestionsModal(false);
   };
 
+  const handleLogout = async () => {
+    try {
+      await Auth.signOut();
+      navigate('/login'); // Redirect to login page after logout
+    } catch (err) {
+      alert('Logout failed. Please try again.');
+    }
+  };
+
   const question = isRandomMode ? data[shuffledQuestions[currentQuestion]] : data[currentQuestion];
   const totalQuestions = data.length;
   const accuracy = (correctAnswers / totalQuestions) * 100;
@@ -196,198 +208,204 @@ function Quiz() {
 
   return (
     <div className="quiz-container">
-      <div className="header-buttons">
-        <button className="restart-button" onClick={handleRestart}>Neustart</button>
-        
+      <div className="left-panel">
+        <h1>AWS QUIZ PROJEKT APP</h1>
+        <p>Dieses Projekt wird von Oskar, Gülcan, Lyne, Emanuel, Asadul und Nabil durchgeführt und umgesetzt.</p>
+        <p>Slogan: Teamarbeit, Harmonie und gegenseitiger Respekt.</p>
       </div>
-      <div className="timer">
-        {formatTime(timeLeft)}
-      </div>
-      <div className="quiz-content">
-        <p className="question-number">Frage {currentQuestion + 1} von {totalQuestions}</p>
-        <p className="question-text">{question.question}</p>
-        <div className="answer-buttons">
-          <button
-            onClick={() => handleOptionClick(1)}
-            className={selectedOption === 1 ? (question.ans === 1 ? "correct" : "wrong") : ""}
-          >
-            {question.option1}
-          </button>
-          <button
-            onClick={() => handleOptionClick(2)}
-            className={selectedOption === 2 ? (question.ans === 2 ? "correct" : "wrong") : ""}
-          >
-            {question.option2}
-          </button>
-          <button
-            onClick={() => handleOptionClick(3)}
-            className={selectedOption === 3 ? (question.ans === 3 ? "correct" : "wrong") : ""}
-          >
-            {question.option3}
-          </button>
-          <button
-            onClick={() => handleOptionClick(4)}
-            className={selectedOption === 4 ? (question.ans === 4 ? "correct" : "wrong") : ""}
-          >
-            {question.option4}
-          </button>
+      <div className="main-content">
+        <div className="header-buttons">
+          <button className="restart-button" onClick={handleRestart}>Neustart</button>
+          <button className="logout-button" onClick={handleLogout}>Logout</button>
         </div>
-
-        <div className="navigation-buttons">
-          <button onClick={handlePrevQuestion} className="prev-button">Vorherige Frage</button>
-          <button onClick={handleNextQuestion} className="next-button">Nächste Frage</button>
+        <div className="timer">
+          {formatTime(timeLeft)}
         </div>
-
-        <div className="answer-feedback-container">
-          <button onClick={handleShowAnswer} className="quiz-button">Antwort-Anzeigen</button>
-          <button onClick={handleMarkQuestion} className="quiz-button">
-            {markedQuestions.includes(currentQuestion) ? 'Frage entmarkieren' : 'Frage markieren'}
-          </button>
-          <button onClick={handleShowMarkedQuestions} className="quiz-button">Markierten Fragen anzeigen</button>
-          <button onClick={handleRandomQuestions} className="quiz-button">
-            {isRandomMode ? 'Random-Fragen deaktivieren' : 'Random-Fragen aktivieren'}
-          </button>
-        </div>
-
-        {showAnswer && (
-          <div className="full-answer">
-            <p className="correct-answer">{correctInfo[currentQuestion]}</p>
-            <p className="wrong-answer">{question.wrongInfo.option1}</p>
-            <p className="wrong-answer">{question.wrongInfo.option2}</p>
-            <p className="wrong-answer">{question.wrongInfo.option3}</p>
-            <p className="wrong-answer">{question.wrongInfo.option4}</p>
-          </div>
-        )}
-
-        {showResult && (
-          <div className="result-container">
-            <p>Sie haben {correctAnswers} von {totalQuestions} Fragen richtig beantwortet ({accuracy.toFixed(2)}% Richtigkeit).</p>
-          </div>
-        )}
-
-        <div className="video-container">
-          <p className="video-title">Erklärungsvideo</p>
-          <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/3XFODda6YXo"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-        </div>
-
-        <button onClick={handleFeedbackToggle} className="quiz-button">Feedback Senden</button>
-
-        {showFeedbackForm && (
-          <div className="feedback-form">
-            <h3>Feedback</h3>
-            <textarea
-              value={feedback}
-              onChange={(e) => setFeedback(e.target.value)}
-              placeholder="Schreiben Sie bitte hier Ihr Feedback..."
-              rows="4"
-              cols="50"
-            ></textarea>
-            <div className="star-rating">
-              {[...Array(5)].map((_, index) => (
-                <span
-                  key={index}
-                  className={index < rating ? 'star selected' : 'star'}
-                  onClick={() => handleRating(index + 1)}
-                >
-                  &#9733;
-                </span>
-              ))}
-            </div>
-            <button onClick={handleFeedbackSubmit} className="submit-feedback-button">Senden</button>
-          </div>
-        )}
-
-      </div>
-
-      <div className="side-panel">
-        <button className="review-attempt-button side" onClick={handleReviewAttempt}>Überprüfung der Antworten</button>
-        <div className="dot-container">
-          {[...Array(totalQuestions)].map((_, index) => (
-            <div
-              key={index}
-              className={`dot ${getQuestionClass(index)} ${index === currentQuestion ? 'current' : ''} ${markedQuestions.includes(index) ? 'marked' : ''}`}
-              onClick={() => handleQuestionClick(index)}
+        <div className="quiz-content">
+          <p className="question-number">Frage {currentQuestion + 1} von {totalQuestions}</p>
+          <p className="question-text">{question.question}</p>
+          <div className="answer-buttons">
+            <button
+              onClick={() => handleOptionClick(1)}
+              className={selectedOption === 1 ? (question.ans === 1 ? "correct" : "wrong") : ""}
             >
-              {index + 1}
+              {question.option1}
+            </button>
+            <button
+              onClick={() => handleOptionClick(2)}
+              className={selectedOption === 2 ? (question.ans === 2 ? "correct" : "wrong") : ""}
+            >
+              {question.option2}
+            </button>
+            <button
+              onClick={() => handleOptionClick(3)}
+              className={selectedOption === 3 ? (question.ans === 3 ? "correct" : "wrong") : ""}
+            >
+              {question.option3}
+            </button>
+            <button
+              onClick={() => handleOptionClick(4)}
+              className={selectedOption === 4 ? (question.ans === 4 ? "correct" : "wrong") : ""}
+            >
+              {question.option4}
+            </button>
+          </div>
+
+          <div className="navigation-buttons">
+            <button onClick={handlePrevQuestion} className="prev-button">Vorherige Frage</button>
+            <button onClick={handleNextQuestion} className="next-button">Nächste Frage</button>
+          </div>
+
+          <div className="answer-feedback-container">
+            <button onClick={handleShowAnswer} className="quiz-button">Antwort-Anzeigen</button>
+            <button onClick={handleMarkQuestion} className="quiz-button">
+              {markedQuestions.includes(currentQuestion) ? 'Frage entmarkieren' : 'Frage markieren'}
+            </button>
+            <button onClick={handleShowMarkedQuestions} className="quiz-button">Markierten Fragen anzeigen</button>
+            <button onClick={handleRandomQuestions} className="quiz-button">
+              {isRandomMode ? 'Random-Fragen deaktivieren' : 'Random-Fragen aktivieren'}
+            </button>
+          </div>
+
+          {showAnswer && (
+            <div className="full-answer">
+              <p className="correct-answer">{correctInfo[currentQuestion]}</p>
+              <p className="wrong-answer">{question.wrongInfo.option1}</p>
+              <p className="wrong-answer">{question.wrongInfo.option2}</p>
+              <p className="wrong-answer">{question.wrongInfo.option3}</p>
+              <p className="wrong-answer">{question.wrongInfo.option4}</p>
             </div>
-          ))}
-        </div>
-      </div>
+          )}
 
-      {showReviewModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <button className="close-modal" onClick={closeReviewModal}>X</button>
-            <h3>Deine Antworten</h3>
-            <table className="review-table">
-              <thead>
-                <tr>
-                  <th>Nummer</th>
-                  <th>Frage</th>
-                  <th>Ergebnis</th>
-                  <th>Öffnen</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.map((q, index) => (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{q.question}</td>
-                    <td>{answeredQuestions.find(a => a.question === index) ? answeredQuestions.find(a => a.question === index).isCorrect ? 'Richtig' : 'Falsch' : 'keine Antwort'}</td>
-                    <td><button onClick={() => handleQuestionClick(index)}>Öffnen</button></td>
-                  </tr>
+          {showResult && (
+            <div className="result-container">
+              <p>Sie haben {correctAnswers} von {totalQuestions} Fragen richtig beantwortet ({accuracy.toFixed(2)}% Richtigkeit).</p>
+            </div>
+          )}
+
+          <div className="video-container">
+            <p className="video-title">Erklärungsvideo</p>
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/3XFODda6YXo"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+
+          <button onClick={handleFeedbackToggle} className="quiz-button">Feedback Senden</button>
+
+          {showFeedbackForm && (
+            <div className="feedback-form">
+              <h3>Feedback</h3>
+              <textarea
+                value={feedback}
+                onChange={(e) => setFeedback(e.target.value)}
+                placeholder="Schreiben Sie bitte hier Ihr Feedback..."
+                rows="4"
+                cols="50"
+              ></textarea>
+              <div className="star-rating">
+                {[...Array(5)].map((_, index) => (
+                  <span
+                    key={index}
+                    className={index < rating ? 'star selected' : 'star'}
+                    onClick={() => handleRating(index + 1)}
+                  >
+                    &#9733;
+                  </span>
                 ))}
-              </tbody>
-            </table>
+              </div>
+              <button onClick={handleFeedbackSubmit} className="submit-feedback-button">Senden</button>
+            </div>
+          )}
+        </div>
+
+        <div className="side-panel">
+          <button className="review-attempt-button side" onClick={handleReviewAttempt}>Überprüfung der Antworten</button>
+          <div className="dot-container">
+            {[...Array(totalQuestions)].map((_, index) => (
+              <div
+                key={index}
+                className={`dot ${getQuestionClass(index)} ${index === currentQuestion ? 'current' : ''} ${markedQuestions.includes(index) ? 'marked' : ''}`}
+                onClick={() => handleQuestionClick(index)}
+              >
+                {index + 1}
+              </div>
+            ))}
           </div>
         </div>
-      )}
 
-      {showMarkedQuestionsModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <button className="close-modal" onClick={closeMarkedQuestionsModal}>X</button>
-            <h3>Markierten Fragen</h3>
-            <table className="review-table">
-              <thead>
-                <tr>
-                  <th>Nummer</th>
-                  <th>Frage</th>
-                  <th>Ergebnis</th>
-                  <th>Öffnen</th>
-                </tr>
-              </thead>
-              <tbody>
-                {markedQuestions.map((index) => (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{data[index].question}</td>
-                    <td>{answeredQuestions.find(a => a.question === index) ? answeredQuestions.find(a => a.question === index).isCorrect ? 'Correct' : 'Wrong' : 'Unanswered'}</td>
-                    <td><button onClick={() => handleQuestionClick(index)}>Öffnen</button></td>
+        {showReviewModal && (
+          <div className="modal-overlay">
+            <div className="modal-content">
+              <button className="close-modal" onClick={closeReviewModal}>X</button>
+              <h3>Deine Antworten</h3>
+              <table className="review-table">
+                <thead>
+                  <tr>
+                    <th>Nummer</th>
+                    <th>Frage</th>
+                    <th>Ergebnis</th>
+                    <th>Öffnen</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {data.map((q, index) => (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{q.question}</td>
+                      <td>{answeredQuestions.find(a => a.question === index) ? answeredQuestions.find(a => a.question === index).isCorrect ? 'Richtig' : 'Falsch' : 'keine Antwort'}</td>
+                      <td><button onClick={() => handleQuestionClick(index)}>Öffnen</button></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      <div className="services-container">
-        <ul className="services-list">
-          <h2 className="red-bold"></h2>
-          <li style={{ color: 'white' }}></li>
-          {[].map((service, index) => (
-            <li key={index}>{service}</li>
-          ))}
-        </ul>
+        {showMarkedQuestionsModal && (
+          <div className="modal-overlay">
+            <div className="modal-content">
+              <button className="close-modal" onClick={closeMarkedQuestionsModal}>X</button>
+              <h3>Markierten Fragen</h3>
+              <table className="review-table">
+                <thead>
+                  <tr>
+                    <th>Nummer</th>
+                    <th>Frage</th>
+                    <th>Ergebnis</th>
+                    <th>Öffnen</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {markedQuestions.map((index) => (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{data[index].question}</td>
+                      <td>{answeredQuestions.find(a => a.question === index) ? answeredQuestions.find(a => a.question === index).isCorrect ? 'Correct' : 'Wrong' : 'Unanswered'}</td>
+                      <td><button onClick={() => handleQuestionClick(index)}>Öffnen</button></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        <div className="services-container">
+          <ul className="services-list">
+            <h2 className="red-bold"></h2>
+            <li style={{ color: 'white' }}></li>
+            {[].map((service, index) => (
+              <li key={index}>{service}</li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

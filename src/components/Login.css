@@ -1,16 +1,38 @@
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Center the content vertically */
+  height: 100vh;
+  background-color: #48719a;
+  background-image: url('');
+  background-color: #1d5189; /* Light background color for the page */
+  background-size: cover; /* Ensure the background image covers the whole page */
+}
+
 .login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 50vh;
-  background-color: #f0f0f0;
+  height: 60vh;
+  background-color: #73b4d0;
+  width: 600px; /* Increased width for larger container */
+  padding: 70px; /* Increased padding for more internal space */
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
+}
+
+h1.welcome-text {
+  margin-bottom: 20px;
+  color: #333333; /* Dark text */
 }
 
 form {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 100%;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -27,14 +49,14 @@ h2 {
 
 input {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
 .login-button {
-  padding: 10px;
+  padding: 15px; /* Increased padding for a larger button */
   background-color: #007bff;
   color: white;
   border: none;
@@ -45,6 +67,7 @@ input {
 .login-button:hover {
   background-color: #0056b3;
 }
+
 .sign-up-button {
   margin-top: 20px;
   padding: 10px;
@@ -57,4 +80,15 @@ input {
 
 .sign-up-button:hover {
   background-color: #0056b3;
+}
+
+.forgot-password-link {
+  margin-top: 10px;
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.forgot-password-link:hover {
+  text-decoration: underline;
 }
