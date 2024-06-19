@@ -184,7 +184,7 @@ function Quiz() {
   const handleLogout = async () => {
     try {
       await Auth.signOut();
-      navigate('/login'); // Redirect to login page after logout
+      navigate('/'); // Redirect to login page after logout
     } catch (err) {
       alert('Logout failed. Please try again.');
     }
@@ -216,7 +216,7 @@ function Quiz() {
       <div className="main-content">
         <div className="header-buttons">
           <button className="restart-button" onClick={handleRestart}>Neustart</button>
-          <button className="logout-button" onClick={handleLogout}>Logout</button>
+          <button className="logout-button" onClick={handleLogout}>Ausloggen</button>
         </div>
         <div className="timer">
           {formatTime(timeLeft)}
