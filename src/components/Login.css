@@ -1,3 +1,4 @@
+/* Base Styles */
 .login-page {
   display: flex;
   flex-direction: column;
@@ -8,6 +9,7 @@
   background-image: url('');
   background-color: #1d5189; /* Light background color for the page */
   background-size: cover; /* Ensure the background image covers the whole page */
+  
 }
 
 .login-container {
@@ -17,17 +19,15 @@
   justify-content: center;
   height: 60vh;
   background-color: #73b4d0;
-  width: 600px; /* Increased width for larger container */
-  padding: 70px; /* Increased padding for more internal space */
+  width: 90%; /* Use percentage for responsiveness */
+  max-width: 600px; /* Set a max width */
+  padding: 20px; /* Adjusted padding for smaller screens */
   border: 1px solid #ccc;
   border-radius: 10px;
   text-align: center;
 }
 
-h1.welcome-text {
-  margin-bottom: 20px;
-  color: #333333; /* Dark text */
-}
+
 
 form {
   display: flex;
@@ -91,4 +91,31 @@ input {
 
 .forgot-password-link:hover {
   text-decoration: underline;
+}
+
+/* Media Queries for Responsiveness */
+@media (min-width: 600px) {
+  .login-container {
+    padding: 40px; /* Increase padding for larger screens */
+  }
+
+  .login-button {
+    padding: 15px;
+  }
+
+  .sign-up-button {
+    padding: 15px;
+  }
+}
+
+@media (min-width: 768px) {
+  .login-container {
+    width: 80%; /* Adjust width for tablets */
+  }
+}
+
+@media (min-width: 1024px) {
+  .login-container {
+    width: 600px; /* Fixed width for larger screens */
+  }
 }

@@ -15,12 +15,11 @@ const Login = () => {
       await Auth.signIn(username, password);
       navigate('/quiz'); // Navigiere zum Quiz nach erfolgreichem Login
     } catch (err) {
-      setError('Einloggen hat nicht geklappt, bitte versuchen Sie es nochmal.');
+      setError('Das Einloggen hat nicht geklappt, bitte versuchen Sie es nochmal.');
     }
   };
 
   return (
-
     <div className="login-container">
       <h2>Einloggen</h2>
       <form onSubmit={handleSubmit}>
@@ -41,7 +40,7 @@ const Login = () => {
           />
         </div>
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit" className="login-button">Login</button>
+        <button type="submit" className="login-button">Einloggen</button>
       </form>
       <div className="login-links">
         <button onClick={() => navigate('/sign-up')} className="sign-up-button">
@@ -50,12 +49,9 @@ const Login = () => {
         <button onClick={() => navigate('/forgot-password')} className="forgot-password-link">
           Passwort vergessen?
         </button>
-        </div>
+      </div>
     </div>
   );
 };
 
 export default Login;
-
-
-    

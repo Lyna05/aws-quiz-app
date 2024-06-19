@@ -1,3 +1,4 @@
+/* Base Styles */
 .container {
   display: flex;
   flex-direction: column;
@@ -6,12 +7,14 @@
 }
 
 .question-container {
-  width: 60%;
+  width: 90%;
+  max-width: 600px; /* Set a max width */
   margin-bottom: 20px;
 }
 
 .answer-container {
-  width: 60%;
+  width: 90%;
+  max-width: 600px; /* Set a max width */
   margin-bottom: 20px;
 }
 
@@ -40,4 +43,26 @@
 
 .feedback-button:hover {
   background-color: #45a049;
+}
+
+/* Media Queries for Responsiveness */
+@media (min-width: 600px) {
+  .question-container,
+  .answer-container {
+    width: 80%; /* Adjust width for larger screens */
+  }
+}
+
+@media (min-width: 768px) {
+  .question-container,
+  .answer-container {
+    width: 70%; /* Adjust width for tablets */
+  }
+}
+
+@media (min-width: 1024px) {
+  .question-container,
+  .answer-container {
+    width: 60%; /* Fixed width for larger screens */
+  }
 }
