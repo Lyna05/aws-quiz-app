@@ -120,3 +120,54 @@ input {
   text-decoration: none;
   cursor: pointer;
 }
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .login-container {
+    padding: 20px;
+    margin-top: -50px; /* Adjust to move the container up */
+  }
+
+  .header {
+    font-size: 20px;
+    top: 10px; /* Adjust to move the text above the container */
+  }
+
+  .input-container,
+  .password-container {
+    margin-bottom: 15px;
+  }
+
+  .login-button,
+  .sign-up-button,
+  .forgot-password-link {
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 15px;
+    margin-top: -30px; /* Adjust to move the container up */
+  }
+
+  .header {
+    font-size: 18px;
+    top: 5px; /* Adjust to move the text above the container */
+  }
+
+  .input-container,
+  .password-container {
+    margin-bottom: 10px;
+  }
+
+  .login-button,
+  .sign-up-button,
+  .forgot-password-link {
+    padding: 6px 12px;
+  }
+
+  .eye-icon {
+    top: 70%; /* Adjust this value to move the eye icon down */
+  }
+}
