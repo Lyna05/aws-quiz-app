@@ -78,7 +78,7 @@ const Login = () => {
         <h2>Einloggen</h2>
         <form onSubmit={handleSubmit}>
           <div className="input-container">
-            <label>BenutzerName:</label>
+            <label>Benutzer Name:</label>
             <input
               type="text"
               value={username}
@@ -106,7 +106,7 @@ const Login = () => {
           Registrieren 
           </button>
           <button type="button" onClick={() => setShowForgotPasswordModal(true)} className="forgot-password-link">
-          Password Ändern
+          Passwort vergessen?
           </button>
         </form>
       </div>
