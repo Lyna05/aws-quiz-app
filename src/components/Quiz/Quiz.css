@@ -158,6 +158,7 @@
 .feedback-buttons {
   display: flex;
   flex-direction: column;
+  
 }
 
 .star-rating {
