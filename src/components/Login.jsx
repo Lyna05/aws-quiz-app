@@ -78,7 +78,7 @@ const Login = () => {
         <h2>Einloggen</h2>
         <form onSubmit={handleSubmit}>
           <div className="input-container">
-            <label>Benutzer Name:</label>
+            <label>Benutzername:</label>
             <input
               type="text"
               value={username}
