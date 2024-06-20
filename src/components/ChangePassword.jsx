@@ -3,6 +3,7 @@ import { Auth } from 'aws-amplify';
 import { useNavigate } from 'react-router-dom';
 import './ChangePassword.css';
 
+
 const ChangePassword = () => {
   const navigate = useNavigate();
   const [oldPassword, setOldPassword] = useState('');
@@ -15,10 +16,10 @@ const ChangePassword = () => {
     try {
       const user = await Auth.currentAuthenticatedUser();
       await Auth.changePassword(user, oldPassword, newPassword);
-      setSuccess('Password changed successfully.');
-      setTimeout(() => navigate('/dashboard'), 2000);
+      setSuccess('Ihr Passwort wurde erfolgreich geändert.');
+      setTimeout(() => navigate('/'), 2000);
     } catch (err) {
-      setError('Failed to change password. Please try again.');
+      setError('Ihr Passwort konnte nicht geändert werden, bitte versuchen Sie es noch einmal.');
     }
   };
 

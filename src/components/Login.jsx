@@ -33,7 +33,7 @@ const Login = () => {
       setIsConfirming(true);
       setError('');
     } catch (err) {
-      console.error('Error during forgotPassword:', err);
+      console.error('Fehlermeldung:', err);
       setError('Das Zurücksetzen des Passworts ist fehlgeschlagen, bitte versuchen Sie es erneut.');
     }
   };
@@ -44,7 +44,7 @@ const Login = () => {
       await Auth.forgotPasswordSubmit(forgotPasswordEmail, confirmationCode, newPassword);
       setShowForgotPasswordModal(false);
       setIsConfirming(false);
-      navigate('/login');
+      navigate('/');
     } catch (err) {
       console.error('Error during forgotPasswordSubmit:', err);
       setError('Das Zurücksetzen des Passworts ist fehlgeschlagen, bitte versuchen Sie es erneut.');
