@@ -119,3 +119,19 @@ input {
 .forgot-password-link:hover {
   text-decoration: underline;
 }
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  flex: 1;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  user-select: none; /* Prevent text selection on double-click */
+}
