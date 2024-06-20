@@ -3,12 +3,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 70vh;
   background-color: #1e1e1e; /* Dark background color */
   background-image: url('Aws.jpg'); /* Optional background image */
   background-size: cover;
   background-position: center;
-  padding-top: 0px; /* Adjust to move the container and text up */
+  padding-top: 160px; /* Adjust to move the container and text up */
 }
 
 .header {
