@@ -221,12 +221,12 @@ function Quiz() {
       <div className="main-content">
         <div className="header-buttons">
           <button className="restart-button" onClick={handleRestart}>Neustart</button>
+          {!timerActive && <button onClick={startTimer} className="start-timer-button">Timer Starten</button>}
           <button className="logout-button" onClick={handleLogout}>Ausloggen</button>
         </div>
         <div className="timer">
           {formatTime(timeLeft)}
         </div>
-        {!timerActive && <button onClick={startTimer} className="start-timer-button">Timer Starten</button>}
         <div className="quiz-content">
           <p className="question-number">Frage {currentQuestion + 1} von {totalQuestions}</p>
           <p className="question-text">{question.question}</p>
