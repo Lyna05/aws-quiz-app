@@ -4,6 +4,7 @@ import { correctInfo } from '../../assets/correctInfo';
 import { Auth } from 'aws-amplify';
 import { useNavigate } from 'react-router-dom';
 import './Quiz.css';
+import './clock.mp3';
 
 console.log(data); // Debug-Ausgabe
 console.log(correctInfo); // Debug-Ausgabe
@@ -22,7 +23,7 @@ function Quiz() {
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
   const [markedQuestions, setMarkedQuestions] = useState([]);
   const [timeLeft, setTimeLeft] = useState(40 * 60); // 40 Minuten in Sekunden
-  const [timerActive, setTimerActive] = useState(true);
+  const [timerActive, setTimerActive] = useState(false); // Timer ist standardmäßig nicht aktiv
   const [showReviewModal, setShowReviewModal] = useState(false); // Status für Überprüfungsmodal
   const [showMarkedQuestionsModal, setShowMarkedQuestionsModal] = useState(false); // Status für markierte Fragenmodal
 
@@ -51,7 +52,7 @@ function Quiz() {
   }, [timerActive]);
 
   const playSound = () => {
-    const audio = new Audio('/path/to/sound.mp3'); // Pfad zu Ihrer Sounddatei
+    const audio = new Audio('/clock.mp3'); // Pfad zu Ihrer Sounddatei
     audio.play();
   };
 
@@ -154,7 +155,7 @@ function Quiz() {
     setAnsweredQuestions([]);
     setMarkedQuestions([]);
     setTimeLeft(40 * 60); // Timer zurücksetzen
-    setTimerActive(true); // Timer beim Neustart starten
+    setTimerActive(false); // Timer nicht automatisch starten
   };
 
   const handleMarkQuestion = () => {
@@ -190,6 +191,10 @@ function Quiz() {
     }
   };
 
+  const startTimer = () => {
+    setTimerActive(true);
+  };
+
   const question = isRandomMode ? data[shuffledQuestions[currentQuestion]] : data[currentQuestion];
   const totalQuestions = data.length;
   const accuracy = (correctAnswers / totalQuestions) * 100;
@@ -221,6 +226,7 @@ function Quiz() {
         <div className="timer">
           {formatTime(timeLeft)}
         </div>
+        {!timerActive && <button onClick={startTimer} className="start-timer-button">Timer Starten</button>}
         <div className="quiz-content">
           <p className="question-number">Frage {currentQuestion + 1} von {totalQuestions}</p>
           <p className="question-text">{question.question}</p>

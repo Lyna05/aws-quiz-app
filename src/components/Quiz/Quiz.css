@@ -505,4 +505,21 @@
   max-width: 300px;
 }
 
+.start-timer-button {
+  background-color: #4CAF50; /* Grüne Hintergrundfarbe */
+  border: none; /* Kein Rand */
+  color: white; /* Weißer Text */
+  padding: 15px 32px; /* Padding */
+  text-align: center; /* Textzentrierung */
+  text-decoration: none; /* Keine Textunterstreichung */
+  display: inline-block; /* Inline-Block Anzeige */
+  font-size: 16px; /* Schriftgröße */
+  margin: 4px 2px; /* Margin */
+  cursor: pointer; /* Zeiger-Cursor */
+  border-radius: 12px; /* Abgerundete Ecken */
+}
+
+.start-timer-button:hover {
+  background-color: #4343da ; /* Dunklere grüne Hintergrundfarbe beim Hover */
+}
 /* Add additional styles as necessary */
