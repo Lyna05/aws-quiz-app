@@ -118,9 +118,9 @@ const Login = () => {
             {!isConfirming ? (
               <form onSubmit={handleForgotPasswordSubmit}>
                 <label>
-                  Enter your email:
+                  Enter your username:
                   <input
-                    type="email"
+                    type="text"
                     value={forgotPasswordEmail}
                     onChange={(e) => setForgotPasswordEmail(e.target.value)}
                     required
