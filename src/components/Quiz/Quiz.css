@@ -1,56 +1,89 @@
-.question-number,
-.question-text {
-  color: white;
+/* General Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: Arial, sans-serif;
 }
 
 .quiz-container {
-  max-width: 600px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
+  margin: 0 auto;
   text-align: center;
+  background-color: #2c3e50;
+  width: 100%;
+  max-width: 1200px; /* Max width for larger screens */
+  min-height: 100vh; /* Full height of the viewport */
+  box-sizing: border-box;
 }
 
 .header-buttons {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: 20px;
+  width: 100%;
 }
 
 .review-attempt-button,
-.restart-button {
+.restart-button,
+.logout-button,
+.start-timer-button {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #e6e6fa; /* Pastel lila Farbe */
-  color: white;
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  min-width: 150px;
+  margin: 10px 0; /* Adjust margin for vertical alignment */
 }
 
 .review-attempt-button {
   background-color: #e6e6fa;
-  color: white;
+  color: rgb(40, 30, 30);
 }
 
 .restart-button {
   background-color: #4caf50;
+  color: white;
+}
+
+.logout-button {
+  background-color: #f00;
+  color: white;
+}
+
+.logout-button:hover {
+  background-color: #c00;
+}
+
+.start-timer-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.start-timer-button:hover {
+  background-color: #4343da;
 }
 
 .timer {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 20px;
-  color: yellow; /* Gelbe Farbe */
+  color: yellow;
 }
 
 .quiz-container button {
   border-radius: 10px;
   margin: 10px 0;
-  padding: 10px 80px;
+  padding: 10px 20px;
   font-size: 12px;
   background-color: rgb(227, 227, 251);
   color: rgb(16, 16, 16);
-  display: block;
 }
 
 .quiz-container button.correct {
@@ -78,8 +111,9 @@
 
 .navigation-buttons {
   display: flex;
-  justify-content: center;
-  margin-bottom: 15px;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .prev-button,
@@ -94,7 +128,7 @@
 .random-questions-button,
 .mark-question-button {
   display: inline-block;
-  margin-left: 20px;
+  margin: 10px 0;
   padding: 10px 20px;
   font-size: 16px;
   background-color: #4343da;
@@ -123,6 +157,7 @@
 
 .answer-buttons {
   margin: 20px 0;
+  width: 100%;
 }
 
 .answer-buttons button {
@@ -138,6 +173,7 @@
   justify-content: space-between;
   align-items: center;
   margin: 20px 0;
+  width: 100%;
 }
 
 .feedback-toggle-button {
@@ -158,7 +194,6 @@
 .feedback-buttons {
   display: flex;
   flex-direction: column;
-  
 }
 
 .star-rating {
@@ -178,12 +213,6 @@
   cursor: pointer;
 }
 
-.quiz-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .number-box {
   width: 50px;
   height: 50px;
@@ -196,12 +225,12 @@
 
 .dot-container {
   position: relative;
-  top: 20px;
-  width: 3cm;
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
   grid-gap: 5px;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
 .dot {
@@ -242,12 +271,11 @@
 }
 
 .side-panel {
-  position: absolute;
-  right: 20px;
-  top: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  margin-top: 20px;
 }
 
 .review-attempt-button.side {
@@ -260,6 +288,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .submit-feedback-button {
@@ -296,11 +325,10 @@
   border-radius: 8px;
   width: 80%;
   max-width: 800px;
-  max-height: 70vh; /* Set the maximum height */
-  overflow-y: auto; /* Enable vertical scrolling */
-  position: relative; /* Ensure the close button positions correctly */
+  max-height: 70vh;
+  overflow-y: auto;
+  position: relative;
 }
-
 
 .close-modal {
   position: absolute;
@@ -331,6 +359,7 @@
 
 .services-container {
   margin-top: 20px;
+  width: 100%;
 }
 
 .services-list {
@@ -351,24 +380,22 @@
 .video-container {
   text-align: center;
   color: #ffffff;
+  width: 100%;
 }
 
 .show-result-button {
   display: inline-block;
   margin-left: 20px;
-  padding: 50px 50px;
+  padding: 20px;
   font-size: 20px;
   background-color: #4343da;
   color: rgb(9, 9, 9);
-  border: 2px;
+  border: 2px solid transparent;
   cursor: pointer;
 }
 
 .dot-container {
-  position: absolute;
   margin-right: 28px;
-  top: 50px;
-  right: 100px;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -415,6 +442,16 @@
     width: 100%;
     height: auto;
   }
+
+  .header-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .side-panel {
+    align-items: center;
+    width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -435,37 +472,26 @@
     padding: 8px;
     font-size: 12px;
   }
+
+  .header-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navigation-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
 }
+
 .result-container {
   text-align: center;
-  color:rgb(7, 146, 37);
+  color: rgb(7, 146, 37);
 }
+
 .review-modal-content {
-  max-height: 70vh; 
+  max-height: 70vh;
   overflow-y: auto;
-}
-.header-buttons {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-}
-
-.logout-button {
-  padding: 10px 20px;
-  background-color: #f00;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-}
-
-.logout-button:hover {
-  background-color: #c00;
-}
-.quiz-container {
-  display: flex;
-  height: 100vh;
-  background-color: #2c3e50; /* Background color for the entire container */
-  justify-content: space-between; /* Add this line to distribute space between main content and left panel */
 }
 
 .main-content {
@@ -473,93 +499,43 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
+  align-items: center;
 }
 
-.header-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.timer, .quiz-content, .video-container, .side-panel, .services-container {
+.timer,
+.quiz-content,
+.video-container,
+.side-panel,
+.services-container {
   margin-bottom: 20px;
 }
 
 .left-panel {
-  width: 300px; /* Adjust the width as necessary */
+  width: 100%;
   padding: 20px;
-  background-color: #f8f9fa; /* Light background color for the left panel */
-  color: #333; /* Text color */
+  background-color: #f8f9fa;
+  color: #333;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Align content to the top */
+  justify-content: flex-start;
   align-items: center;
-  position: absolute; /* Add this line to make it float over other content */
-  top: 20px; /* Adjust the top position as needed */
-  left: 20px; /* Adjust the left position as needed */
+  position: relative;
 }
 
-.left-panel h1, .left-panel p {
+.left-panel h1,
+.left-panel p {
   margin: 10px 0;
-  margin-right: 20px;
-  color: black; 
-  max-width: 300px;
+  max-width: 100%;
 }
 
-.start-timer-button {
-  background-color: #4CAF50; /* Grüne Hintergrundfarbe */
-  border: none; /* Kein Rand */
-  color: white; /* Weißer Text */
-  padding: 15px 32px; /* Padding */
-  text-align: center; /* Textzentrierung */
-  text-decoration: none; /* Keine Textunterstreichung */
-  display: inline-block; /* Inline-Block Anzeige */
-  font-size: 16px; /* Schriftgröße */
-  margin: 4px 2px; /* Margin */
-  cursor: pointer; /* Zeiger-Cursor */
-  border-radius: 12px; /* Abgerundete Ecken */
-}
+@media (max-width: 768px) {
+  .left-panel {
+    width: 100%;
+    padding: 10px;
+  }
 
-.start-timer-button:hover {
-  background-color: #4343da ; /* Dunklere grüne Hintergrundfarbe beim Hover */
-}
-/* Add additional styles as necessary */.header-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  align-items: center; /* Align items to center vertically */
-}
-
-.header-buttons button {
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  background-color: #e6e6fa; /* Pastel lila Farbe */
-  color: rgb(40, 30, 30);
-  min-width: 150px; /* Ensure all buttons have the same minimum width */
-  margin: 0 5px; /* Add some space between buttons */
-}
-
-.restart-button {
-  background-color: #4caf50;
-}
-
-.logout-button {
-  background-color: #f00;
-  color: #fff;
-}
-
-.logout-button:hover {
-  background-color: #c00;
-}
-
-.start-timer-button {
-  background-color: #4caf50;
-  color: #fff;
-}
-
-.start-timer-button:hover {
-  background-color: #4343da; /* Dunklere grüne Hintergrundfarbe beim Hover */
+  .left-panel h1,
+  .left-panel p {
+    max-width: 100%;
+  }
 }
