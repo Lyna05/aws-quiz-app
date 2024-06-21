@@ -521,7 +521,9 @@ body, html {
   align-items: center;
   position: relative;
 }
-
+.question-number, .question-text {
+  color: white;
+}
 .left-panel h1,
 .left-panel p {
   margin: 10px 0;
