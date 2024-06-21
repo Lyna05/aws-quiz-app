@@ -48,8 +48,8 @@ const ChangePassword = () => {
           {success && <p style={{ color: 'green' }}>{success}</p>}
           <button type="submit">Passwort Ändern</button>
         </form>
-        <button onClick={() => navigate('/sign-up')} className="sign-up-button">
-          Sign Up
+        <button onClick={() => navigate('/')} className="login-button">
+          Login
         </button>
       </div>
     </div>
