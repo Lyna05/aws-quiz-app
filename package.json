@@ -110,6 +110,7 @@
     "eastasianwidth": "^0.2.0",
     "ee-first": "^1.1.1",
     "electron-to-chromium": "^1.4.802",
+    "emailjs-com": "^3.2.0",
     "emoji-regex": "^8.0.0",
     "encode-utf8": "^1.0.3",
     "encodeurl": "^1.0.2",
@@ -428,7 +429,6 @@
     "rimraf": "^3.0.2",
     "rollup": "^4.18.0",
     "rollup-plugin-inject": "^3.0.2",
-    "rollup-plugin-node-polyfills": "^0.2.1",
     "rollup-pluginutils": "^2.8.2",
     "run-parallel": "^1.2.0",
     "safe-array-concat": "^1.1.2",
@@ -464,13 +464,13 @@
     "stackframe": "^1.3.4",
     "stacktrace-parser": "^0.1.10",
     "statuses": "^1.5.0",
+    "string_decoder": "^1.3.0",
     "string-width": "^4.2.3",
     "string-width-cjs": "^4.2.3",
     "string.prototype.matchall": "^4.0.11",
     "string.prototype.trim": "^1.2.9",
     "string.prototype.trimend": "^1.0.8",
     "string.prototype.trimstart": "^1.0.8",
-    "string_decoder": "^1.3.0",
     "strip-ansi": "^6.0.1",
     "strip-ansi-cjs": "^6.0.1",
     "strip-final-newline": "^2.0.0",
@@ -556,7 +556,6 @@
     "zen-observable-ts": "^0.8.19",
     "zen-push": "^0.2.1"
   },
-  "devDependencies": {},
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -571,5 +570,11 @@
   "bugs": {
     "url": "https://github.com/Gulcan82/aws-quiz-app/issues"
   },
-  "homepage": "https://github.com/Gulcan82/aws-quiz-app#readme"
+  "homepage": "https://github.com/Gulcan82/aws-quiz-app#readme",
+  "devDependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
+    "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
+    "@vitejs/plugin-react": "^4.3.1",
+    "rollup-plugin-node-polyfills": "^0.2.1"
+  }
 }
