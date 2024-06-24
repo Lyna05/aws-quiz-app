@@ -158,13 +158,16 @@ body, html {
 .answer-buttons {
   margin: 20px 0;
   width: 100%;
+  display: flex;
+  flex-wrap: wrap; /* Flexbox for buttons */
+  justify-content: center; /* Center align buttons */
+  gap: 10px; /* Space between buttons */
 }
 
 .answer-buttons button {
-  width: 100%;
+  width: calc(50% - 10px); /* Two buttons per row */
   max-width: 500px;
   padding: 15px;
-  margin: 10px auto;
   font-size: 16px;
 }
 
@@ -538,4 +541,15 @@ body, html {
   .left-panel p {
     max-width: 100%;
   }
+}
+
+.question-number, .question-text {
+  color: white;
+}
+
+
+.question-text {
+  max-height: 100px; /* Feste Höhe für die Frage */
+  overflow-y: auto;  /* Scrollbar für lange Fragen */
+  margin-bottom: 20px; /* Abstand zu den Buttons */
 }
