@@ -577,8 +577,7 @@
     "@vitejs/plugin-react": "^4.3.1",
     "rollup-plugin-node-polyfills": "^0.2.1"
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 0d115defe19a876ac3806901dbdb641f772f1a56
+
+
+
