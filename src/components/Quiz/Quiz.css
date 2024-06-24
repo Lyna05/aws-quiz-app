@@ -20,7 +20,141 @@
   gap: 15px;
 }
 
-.change-password-container label {
+.review-attempt-button {
+  background-color: #e6e6fa;
+  color: rgb(40, 30, 30);
+}
+
+.restart-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.logout-button {
+  background-color: #f00;
+  color: white;
+}
+
+.logout-button:hover {
+  background-color: #c00;
+}
+
+.start-timer-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.start-timer-button:hover {
+  background-color: #4343da;
+}
+
+.timer {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: yellow;
+}
+
+.quiz-container button {
+  border-radius: 10px;
+  margin: 10px 0;
+  padding: 10px 20px;
+  font-size: 12px;
+  background-color: rgb(227, 227, 251);
+  color: rgb(16, 16, 16);
+}
+
+.quiz-container button.correct {
+  background-color: rgb(60, 218, 60);
+  color: rgb(219, 231, 219);
+}
+
+.quiz-container button.wrong {
+  background-color: rgb(225, 44, 44);
+  color: white;
+}
+
+.quiz-container p {
+  font-size: 18px;
+  margin: 15px 0;
+}
+
+.quiz-container .correct-answer {
+  color: rgb(7, 146, 37);
+}
+
+.quiz-container .wrong-answer {
+  color: rgb(193, 14, 14);
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.prev-button,
+.next-button {
+  font-size: 16px;
+  padding: 10px 20px;
+  margin: 0 5px;
+}
+
+.show-answer-button,
+.feedback-button,
+.random-questions-button,
+.mark-question-button {
+  display: inline-block;
+  margin: 10px 0;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4343da;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.show-answer-button:hover,
+.feedback-button:hover,
+.random-questions-button:hover,
+.mark-question-button:hover {
+  background-color: #1f2bb1;
+}
+
+.full-answer p {
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+.question-number {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.answer-buttons {
+  margin: 20px 0;
+  width: 100%;
+}
+
+.answer-buttons button {
+  width: 100%;
+  max-width: 500px;
+  padding: 15px;
+  margin: 10px auto;
+  font-size: 16px;
+}
+
+.answer-feedback-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.feedback-toggle-button {
   display: block;
   margin-bottom: 5px;
   color: white; /* Textfarbe weiß */
@@ -63,3 +197,14 @@
   background-color: #0056b3;
 }
 
+
+.question-number, .question-text {
+  color: white;
+}
+
+
+.question-text {
+  max-height: 100px; /* Feste Höhe für die Frage */
+  overflow-y: auto;  /* Scrollbar für lange Fragen */
+  margin-bottom: 20px; /* Abstand zu den Buttons */
+}
