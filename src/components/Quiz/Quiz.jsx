@@ -3,6 +3,7 @@ import { data } from '../../assets/data';
 import { correctInfo } from '../../assets/correctInfo';
 import { Auth } from 'aws-amplify';
 import { useNavigate } from 'react-router-dom';
+import emailjs from 'emailjs-com'; // Importă EmailJS
 import './Quiz.css';
 import './clock.mp3';
 
@@ -127,18 +128,27 @@ function Quiz() {
     const feedbackContent = `Rating: ${rating} stars\nFeedback: ${feedback}`;
     console.log("Feedback submitted:", feedbackContent);
 
-    // Platzhalter für das Senden der E-Mail
-    await sendEmail(feedbackContent);
+    // Trimite emailul
+    await sendFeedback();
 
     setFeedback("");
     setRating(0);
     alert("Vielen Dank für Ihr Feedback!");
   };
 
-  const sendEmail = async (content) => {
-    // Platzhalterfunktion, um das Senden einer E-Mail zu simulieren
-    // Sie würden dies durch einen tatsächlichen E-Mail-Sendedienst oder einen Backend-API-Aufruf ersetzen
-    console.log("Sending email with content:", content);
+  const sendFeedback = () => {
+    emailjs.send('service_cy7fxa7', 'template_rfk55mw', {
+      feedback,
+      rating,
+    }, 'yWvbAzVCVEoP5pspR') // Replace with your actual User ID
+      .then(() => {
+        alert('Feedback gesendet!');
+        setFeedback('');
+        setRating(0);
+      })
+      .catch(() => {
+        alert('Fehler beim Senden des Feedbacks.');
+      });
   };
 
   const handleRestart = () => {

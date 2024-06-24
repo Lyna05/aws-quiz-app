@@ -72,7 +72,7 @@ const Login = () => {
   return (
     <div className="login-page">
       <div className="header">
-        <h1>Willkommen bei der Master Quiz App</h1>
+        <h1>Willkommen bei der Aws Master Quiz App</h1>
       </div>
       <div className="login-container">
         <h2>Einloggen</h2>
