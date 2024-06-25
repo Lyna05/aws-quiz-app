@@ -3,9 +3,8 @@ import { data } from '../../assets/data';
 import { correctInfo } from '../../assets/correctInfo';
 import { Auth } from 'aws-amplify';
 import { useNavigate } from 'react-router-dom';
-import emailjs from 'emailjs-com'; // Importă EmailJS
 import './Quiz.css';
-import './clock.mp3';
+import clockSound from './clock.mp3'; // Importieren der Sounddatei
 
 console.log(data); // Debug-Ausgabe
 console.log(correctInfo); // Debug-Ausgabe
@@ -17,8 +16,6 @@ function Quiz() {
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [rating, setRating] = useState(0);
   const [showResult, setShowResult] = useState(false);
-  const [shuffledQuestions, setShuffledQuestions] = useState([]);
-  const [isRandomMode, setIsRandomMode] = useState(false);
   const [feedback, setFeedback] = useState("");
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
@@ -27,6 +24,7 @@ function Quiz() {
   const [timerActive, setTimerActive] = useState(false); // Timer ist standardmäßig nicht aktiv
   const [showReviewModal, setShowReviewModal] = useState(false); // Status für Überprüfungsmodal
   const [showMarkedQuestionsModal, setShowMarkedQuestionsModal] = useState(false); // Status für markierte Fragenmodal
+  const [isRandomMode, setIsRandomMode] = useState(false); // Status für Zufallsmodus
 
   const timerRef = useRef(null);
   const navigate = useNavigate();
@@ -53,7 +51,7 @@ function Quiz() {
   }, [timerActive]);
 
   const playSound = () => {
-    const audio = new Audio('/clock.mp3'); // Pfad zu Ihrer Sounddatei
+    const audio = new Audio(clockSound); // Pfad zur Sounddatei
     audio.play();
   };
 
@@ -64,6 +62,14 @@ function Quiz() {
     setAnsweredQuestions([...answeredQuestions, { question: currentQuestion, isCorrect }]);
   };
 
+  const getRandomQuestionIndex = () => {
+    let randomIndex = Math.floor(Math.random() * data.length);
+    while (randomIndex === currentQuestion) {
+      randomIndex = Math.floor(Math.random() * data.length);
+    }
+    return randomIndex;
+  };
+
   const handleNextQuestion = () => {
     if (selectedOption === data[currentQuestion].ans) {
       setCorrectAnswers(correctAnswers + 1);
@@ -72,7 +78,7 @@ function Quiz() {
     setShowAnswer(false);
 
     if (isRandomMode) {
-      setCurrentQuestion((prevQuestion) => (prevQuestion + 1) % shuffledQuestions.length);
+      setCurrentQuestion(getRandomQuestionIndex());
     } else {
       setCurrentQuestion((prevQuestion) => (prevQuestion + 1) % data.length);
     }
@@ -87,7 +93,7 @@ function Quiz() {
     setShowAnswer(false);
 
     if (isRandomMode) {
-      setCurrentQuestion((prevQuestion) => (prevQuestion - 1 + shuffledQuestions.length) % shuffledQuestions.length);
+      setCurrentQuestion(getRandomQuestionIndex());
     } else {
       setCurrentQuestion((prevQuestion) => (prevQuestion - 1 + data.length) % data.length);
     }
@@ -102,16 +108,15 @@ function Quiz() {
     setShowFeedbackForm(!showFeedbackForm);
   };
 
-  const handleRandomQuestions = () => {
-    if (isRandomMode) {
-      setIsRandomMode(false);
-      setShuffledQuestions([]);
+  const handleRandomQuestionsToggle = () => {
+    setIsRandomMode(!isRandomMode);
+    if (!isRandomMode) {
+      setCurrentQuestion(getRandomQuestionIndex());
     } else {
-      const shuffled = data.map((_, index) => index).sort(() => Math.random() - 0.5);
-      setShuffledQuestions(shuffled);
-      setIsRandomMode(true);
-      setCurrentQuestion(shuffled[0]);
+      setCurrentQuestion(0);
     }
+    setShowAnswer(false);
+    setSelectedOption(null);
   };
 
   const handleQuestionClick = (index) => {
@@ -128,27 +133,18 @@ function Quiz() {
     const feedbackContent = `Rating: ${rating} stars\nFeedback: ${feedback}`;
     console.log("Feedback submitted:", feedbackContent);
 
-    // Trimite emailul
-    await sendFeedback();
+    // Platzhalter für das Senden der E-Mail
+    await sendEmail(feedbackContent);
 
     setFeedback("");
     setRating(0);
     alert("Vielen Dank für Ihr Feedback!");
   };
 
-  const sendFeedback = () => {
-    emailjs.send('service_cy7fxa7', 'template_rfk55mw', {
-      feedback,
-      rating,
-    }, 'yWvbAzVCVEoP5pspR') // Replace with your actual User ID
-      .then(() => {
-        alert('Feedback gesendet!');
-        setFeedback('');
-        setRating(0);
-      })
-      .catch(() => {
-        alert('Fehler beim Senden des Feedbacks.');
-      });
+  const sendEmail = async (content) => {
+    // Platzhalterfunktion, um das Senden einer E-Mail zu simulieren
+    // Sie würden dies durch einen tatsächlichen E-Mail-Sendedienst oder einen Backend-API-Aufruf ersetzen
+    console.log("Sending email with content:", content);
   };
 
   const handleRestart = () => {
@@ -158,14 +154,13 @@ function Quiz() {
     setCorrectAnswers(0);
     setRating(0);
     setShowResult(false);
-    setShuffledQuestions([]);
-    setIsRandomMode(false);
     setFeedback("");
     setShowFeedbackForm(false);
     setAnsweredQuestions([]);
     setMarkedQuestions([]);
     setTimeLeft(40 * 60); // Timer zurücksetzen
     setTimerActive(false); // Timer nicht automatisch starten
+    setIsRandomMode(false); // Zufallsmodus deaktivieren
   };
 
   const handleMarkQuestion = () => {
@@ -205,7 +200,7 @@ function Quiz() {
     setTimerActive(true);
   };
 
-  const question = isRandomMode ? data[shuffledQuestions[currentQuestion]] : data[currentQuestion];
+  const question = data[currentQuestion];
   const totalQuestions = data.length;
   const accuracy = (correctAnswers / totalQuestions) * 100;
 
@@ -237,6 +232,7 @@ function Quiz() {
         <div className="timer">
           {formatTime(timeLeft)}
         </div>
+
         <div className="quiz-content">
           <p className="question-number">Frage {currentQuestion + 1} von {totalQuestions}</p>
           <p className="question-text">{question.question}</p>
@@ -278,8 +274,8 @@ function Quiz() {
               {markedQuestions.includes(currentQuestion) ? 'Frage entmarkieren' : 'Frage markieren'}
             </button>
             <button onClick={handleShowMarkedQuestions} className="quiz-button">Markierten Fragen anzeigen</button>
-            <button onClick={handleRandomQuestions} className="quiz-button">
-              {isRandomMode ? 'Random-Fragen deaktivieren' : 'Random-Fragen aktivieren'}
+            <button onClick={handleRandomQuestionsToggle} className="quiz-button">
+              {isRandomMode ? 'Random deaktivieren' : 'Random aktivieren'}
             </button>
           </div>
 
@@ -299,6 +295,21 @@ function Quiz() {
             </div>
           )}
 
+          <div className="review-and-dots">
+            <button className="review-attempt-button side" onClick={handleReviewAttempt}>Überprüfung der Antworten</button>
+            <div className="dot-container">
+              {[...Array(totalQuestions)].map((_, index) => (
+                <div
+                  key={index}
+                  className={`dot ${getQuestionClass(index)} ${index === currentQuestion ? 'current' : ''} ${markedQuestions.includes(index) ? 'marked' : ''}`}
+                  onClick={() => handleQuestionClick(index)}
+                >
+                  {index + 1}
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className="video-container">
             <p className="video-title">Erklärungsvideo</p>
             <iframe
@@ -311,49 +322,34 @@ function Quiz() {
               allowFullScreen
             ></iframe>
           </div>
+        </div>
 
-          <button onClick={handleFeedbackToggle} className="quiz-button">Feedback Senden</button>
+        <button onClick={handleFeedbackToggle} className="quiz-button feedback-button">Feedback Senden</button>
 
-          {showFeedbackForm && (
-            <div className="feedback-form">
-              <h3>Feedback</h3>
-              <textarea
-                value={feedback}
-                onChange={(e) => setFeedback(e.target.value)}
-                placeholder="Schreiben Sie bitte hier Ihr Feedback..."
-                rows="4"
-                cols="50"
-              ></textarea>
-              <div className="star-rating">
-                {[...Array(5)].map((_, index) => (
-                  <span
-                    key={index}
-                    className={index < rating ? 'star selected' : 'star'}
-                    onClick={() => handleRating(index + 1)}
-                  >
-                    &#9733;
-                  </span>
-                ))}
-              </div>
-              <button onClick={handleFeedbackSubmit} className="submit-feedback-button">Senden</button>
+        {showFeedbackForm && (
+          <div className="feedback-form">
+            <h3>Feedback</h3>
+            <textarea
+              value={feedback}
+              onChange={(e) => setFeedback(e.target.value)}
+              placeholder="Schreiben Sie bitte hier Ihr Feedback..."
+              rows="4"
+              cols="50"
+            ></textarea>
+            <div className="star-rating">
+              {[...Array(5)].map((_, index) => (
+                <span
+                  key={index}
+                  className={index < rating ? 'star selected' : 'star'}
+                  onClick={() => handleRating(index + 1)}
+                >
+                  &#9733;
+                </span>
+              ))}
             </div>
-          )}
-        </div>
-
-        <div className="side-panel">
-          <button className="review-attempt-button side" onClick={handleReviewAttempt}>Überprüfung der Antworten</button>
-          <div className="dot-container">
-            {[...Array(totalQuestions)].map((_, index) => (
-              <div
-                key={index}
-                className={`dot ${getQuestionClass(index)} ${index === currentQuestion ? 'current' : ''} ${markedQuestions.includes(index) ? 'marked' : ''}`}
-                onClick={() => handleQuestionClick(index)}
-              >
-                {index + 1}
-              </div>
-            ))}
+            <button onClick={handleFeedbackSubmit} className="submit-feedback-button">Senden</button>
           </div>
-        </div>
+        )}
 
         {showReviewModal && (
           <div className="modal-overlay">
@@ -412,19 +408,8 @@ function Quiz() {
             </div>
           </div>
         )}
-
-        <div className="services-container">
-          <ul className="services-list">
-            <h2 className="red-bold"></h2>
-            <li style={{ color: 'white' }}></li>
-            {[].map((service, index) => (
-              <li key={index}>{service}</li>
-            ))}
-          </ul>
-        </div>
       </div>
     </div>
-    
   );
 }
 
