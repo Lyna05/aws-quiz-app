@@ -27,7 +27,7 @@ body, html {
   position: absolute;
   top: 20px; /* Adjust to move the text above the container */
   width: 100%;
-  padding: 0 20px;
+  padding: 20 20px;
   box-sizing: border-box;
 }
 
@@ -43,7 +43,9 @@ body, html {
   margin-top: -50px; /* Adjust to move the container up */
   box-sizing: border-box;
 }
-
+.login-container h2 {
+  padding-left: 50px;
+}
 .input-container,
 .password-container {
   margin-bottom: 20px;
@@ -97,6 +99,14 @@ input {
   margin-bottom: 10px;
   box-sizing: border-box;
 }
+.sign-up-button{
+  margin-bottom: 30px;
+  margin-top: auto;
+}
+.forgot-password-link{
+  margin-top: auto;
+}
+
 
 .login-button:hover,
 .sign-up-button:hover,
@@ -203,5 +213,13 @@ input {
 
   .modal-content {
     padding: 15px;
-  }
+  }}
+
+  .aws-logo {
+    width: 100px; /* Adjust the size as needed */
+    height: auto;
+    margin-left: 100px; /* Add some space between the text and the logo */
+    vertical-align: middle; /* Align the logo with the text */
+  
 }
+

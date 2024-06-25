@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Auth } from 'aws-amplify';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
-
+import awsLogo from './aws-logo.png'; // Make sure the path is correct
 const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
@@ -75,7 +75,7 @@ const Login = () => {
         <h1>Willkommen bei der AWS Master Quiz-App</h1>
       </div>
       <div className="login-container">
-        <h2>Einloggen</h2>
+        <h2>Einloggen <img src={awsLogo} alt="AWS Logo" className="aws-logo" /></h2>
         <form onSubmit={handleSubmit}>
           <div className="input-container">
             <label>Benutzername:</label>
@@ -101,7 +101,9 @@ const Login = () => {
             <input type="checkbox" id="rememberMe" name="rememberMe" />
             <label htmlFor="rememberMe">Benutzername Merken</label>
           </div>
-          <button type="submit" className="login-button">Weiter</button>
+          <button type="submit" className="login-button">Weiter
+          
+          </button>
           <button type="button" onClick={() => navigate('/sign-up')} className="sign-up-button">
           Registrieren 
           </button>
