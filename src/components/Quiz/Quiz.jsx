@@ -225,10 +225,7 @@ function Quiz() {
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
   };
 
-  const extractDomain = (info) => {
-    const match = info.match(/Domain:(\d+)/);
-    return match ? match[1] : "";
-  };
+ 
 
   return (
     <div className="quiz-container">
@@ -296,7 +293,7 @@ function Quiz() {
 
           {showAnswer && (
             <div className="full-answer">
-              <p className="domain-text">Domain: {extractDomain(question.info)}</p> {/* Afiseaza domain-ul */}
+              
               <p className="correct-answer">{correctInfo[currentQuestion]}</p>
               <p className="wrong-answer">{question.wrongInfo.option1}</p>
               <p className="wrong-answer">{question.wrongInfo.option2}</p>
