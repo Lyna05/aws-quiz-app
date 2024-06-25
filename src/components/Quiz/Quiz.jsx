@@ -424,6 +424,7 @@ function Quiz() {
         </div>
       </div>
     </div>
+    
   );
 }
 

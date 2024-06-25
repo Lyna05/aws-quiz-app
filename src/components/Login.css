@@ -1,0 +1,201 @@
+/* General Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.login-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #1e1e1e; /* Dark background color */
+  background-image: url('Aws.jpg'); /* Optional background image */
+  background-size: cover;
+  background-position: center;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 20px; /* Adjust to move the text above the container */
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.login-container {
+  background-color: white;
+  padding-top: 150px;
+  padding: 8px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 420px;
+  width: 100%;
+  margin-top: -50px; /* Adjust to move the container up */
+  box-sizing: border-box;
+}
+
+.input-container,
+.password-container {
+  margin-bottom: 20px;
+  width: 100%;
+  text-align: left;
+  position: relative; /* Add relative positioning for the password container */
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 10px;
+  top: 70%; /* Adjust to move the icon down */
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.remember-me-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.remember-me-container input {
+  margin-right: 10px;
+}
+
+.login-button,
+.sign-up-button,
+.forgot-password-link {
+  background-color: #ff9900; /* AWS orange color */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.login-button:hover,
+.sign-up-button:hover,
+.forgot-password-link:hover {
+  background-color: #cc7a00;
+}
+
+/* Modal styling */
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 80%;
+  box-sizing: border-box;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .header {
+    font-size: 20px;
+    padding: 0 10px;
+  }
+
+  .login-container {
+    padding: 30px 20px;
+    margin-top: -30px;
+  }
+
+  input {
+    padding: 8px;
+  }
+
+  .eye-icon {
+    right: 8px;
+  }
+
+  .login-button,
+  .sign-up-button,
+  .forgot-password-link {
+    padding: 8px 15px;
+    font-size: 14px;
+  }
+
+  .modal-content {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    font-size: 18px;
+    padding: 0 5px;
+  }
+
+  .login-container {
+    padding: 20px 10px;
+    margin-top: -20px;
+  }
+
+  input {
+    padding: 6px;
+  }
+
+  .eye-icon {
+    right: 6px;
+  }
+
+  .login-button,
+  .sign-up-button,
+  .forgot-password-link {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .modal-content {
+    padding: 15px;
+  }
+}
