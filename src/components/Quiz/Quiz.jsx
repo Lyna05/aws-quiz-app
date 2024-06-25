@@ -20,6 +20,7 @@ function Quiz() {
   const [shuffledQuestions, setShuffledQuestions] = useState([]);
   const [isRandomMode, setIsRandomMode] = useState(false);
   const [feedback, setFeedback] = useState("");
+  const [userName, setUserName] = useState(""); // Added state for user name
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
   const [markedQuestions, setMarkedQuestions] = useState([]);
@@ -129,20 +130,23 @@ function Quiz() {
     console.log("Feedback submitted:", feedbackContent);
 
     // Trimite emailul
-    await sendFeedback(feedbackContent);
+    await sendFeedback(userName, feedbackContent, rating);
 
+    setUserName(""); // Clear the user name input
     setFeedback("");
     setRating(0);
     alert("Vielen Dank für Ihr Feedback!");
   };
 
-  const sendFeedback = (feedbackContent) => {
+  const sendFeedback = (userName, feedbackContent, rating) => {
     emailjs.send('service_cy7fxa7', 'template_rfk55mw', {
-      feedback: feedbackContent,
-      rating,
+      from_name: userName,
+      message: feedbackContent,
+      rating: rating,
     }, 'yWvbAzVCVEoP5pspR') // Replace with your actual User ID
       .then(() => {
         alert('Feedback gesendet!');
+        setUserName(""); // Clear the user name input
         setFeedback('');
         setRating(0);
       })
