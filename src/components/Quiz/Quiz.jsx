@@ -311,18 +311,7 @@ function Quiz() {
             </div>
           )}
 
-          <div className="video-container">
-            <p className="video-title">Erklärungsvideo</p>
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/3XFODda6YXo"
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          </div>
+         
 
           <div className="side-panel">
             <button className="review-attempt-button side" onClick={handleReviewAttempt}>Überprüfung der Antworten</button>
@@ -337,6 +326,18 @@ function Quiz() {
                 </div>
               ))}
             </div>
+          </div>
+          <div className="video-container">
+            <p className="video-title">Erklärungsvideo</p>
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/3XFODda6YXo"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
           </div>
 
           <button onClick={handleFeedbackToggle} className="quiz-button">Feedback Senden</button>
