@@ -17,8 +17,6 @@ function Quiz() {
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [rating, setRating] = useState(0);
   const [showResult, setShowResult] = useState(false);
-  const [shuffledQuestions, setShuffledQuestions] = useState([]);
-  const [isRandomMode, setIsRandomMode] = useState(false);
   const [feedback, setFeedback] = useState("");
   const [userName, setUserName] = useState(""); // Added state for user name
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
@@ -28,6 +26,8 @@ function Quiz() {
   const [timerActive, setTimerActive] = useState(false); // Timer ist standardmäßig nicht aktiv
   const [showReviewModal, setShowReviewModal] = useState(false); // Status für Überprüfungsmodal
   const [showMarkedQuestionsModal, setShowMarkedQuestionsModal] = useState(false); // Status für markierte Fragenmodal
+  const [isRandomMode, setIsRandomMode] = useState(false); // Status für Zufallsmodus
+
 
   const timerRef = useRef(null);
   const navigate = useNavigate();
@@ -64,6 +64,13 @@ function Quiz() {
     const isCorrect = optionIndex === data[currentQuestion].ans;
     setAnsweredQuestions([...answeredQuestions, { question: currentQuestion, isCorrect }]);
   };
+  const getRandomQuestionIndex = () => {
+    let randomIndex = Math.floor(Math.random() * data.length);
+    while (randomIndex === currentQuestion) {
+      randomIndex = Math.floor(Math.random() * data.length);
+    }
+    return randomIndex;
+  };
 
   const handleNextQuestion = () => {
     if (selectedOption === data[currentQuestion].ans) {
@@ -72,27 +79,33 @@ function Quiz() {
     setSelectedOption(null);
     setShowAnswer(false);
 
+   
+
     if (isRandomMode) {
-      setCurrentQuestion((prevQuestion) => (prevQuestion + 1) % shuffledQuestions.length);
-    } else {
+      setCurrentQuestion(getRandomQuestionIndex());
+    }else{ 
       setCurrentQuestion((prevQuestion) => (prevQuestion + 1) % data.length);
     }
 
-    if (currentQuestion + 1 === totalQuestions) {
+
+    if (currentQuestion + 1 === data.length) {
       setShowResult(true);
     }
   };
-
   const handlePrevQuestion = () => {
     setSelectedOption(null);
     setShowAnswer(false);
 
     if (isRandomMode) {
-      setCurrentQuestion((prevQuestion) => (prevQuestion - 1 + shuffledQuestions.length) % shuffledQuestions.length);
+      setCurrentQuestion(getRandomQuestionIndex());
     } else {
       setCurrentQuestion((prevQuestion) => (prevQuestion - 1 + data.length) % data.length);
     }
   };
+
+  
+
+    
 
   const handleShowAnswer = () => {
     setShowAnswer(!showAnswer);
@@ -103,23 +116,24 @@ function Quiz() {
     setShowFeedbackForm(!showFeedbackForm);
   };
 
-  const handleRandomQuestions = () => {
-    if (isRandomMode) {
-      setIsRandomMode(false);
-      setShuffledQuestions([]);
-    } else {
-      const shuffled = data.map((_, index) => index).sort(() => Math.random() - 0.5);
-      setShuffledQuestions(shuffled);
-      setIsRandomMode(true);
-      setCurrentQuestion(shuffled[0]);
-    }
-  };
+ 
 
   const handleQuestionClick = (index) => {
     setCurrentQuestion(index);
     setShowAnswer(false);
     setSelectedOption(null);
   };
+  const handleRandomQuestionsToggle = () => {
+    setIsRandomMode(!isRandomMode);
+    if (!isRandomMode) {
+      setCurrentQuestion(getRandomQuestionIndex());
+    } else {
+      setCurrentQuestion(0);
+    }
+    setShowAnswer(false);
+    setSelectedOption(null);
+  };
+  
 
   const handleRating = (rate) => {
     setRating(rate);
@@ -162,14 +176,13 @@ function Quiz() {
     setCorrectAnswers(0);
     setRating(0);
     setShowResult(false);
-    setShuffledQuestions([]);
-    setIsRandomMode(false);
     setFeedback("");
     setShowFeedbackForm(false);
     setAnsweredQuestions([]);
     setMarkedQuestions([]);
     setTimeLeft(40 * 60); // Timer zurücksetzen
     setTimerActive(false); // Timer nicht automatisch starten
+    setIsRandomMode(false); // Zufallsmodus deaktivieren
   };
 
   const handleMarkQuestion = () => {
@@ -179,6 +192,8 @@ function Quiz() {
       setMarkedQuestions(markedQuestions.filter(q => q !== currentQuestion));
     }
   };
+ 
+  
 
   const handleReviewAttempt = () => {
     setShowReviewModal(true);
@@ -208,8 +223,9 @@ function Quiz() {
   const startTimer = () => {
     setTimerActive(true);
   };
+ 
 
-  const question = isRandomMode ? data[shuffledQuestions[currentQuestion]] : data[currentQuestion];
+  const question = data[currentQuestion];
   const totalQuestions = data.length;
   const accuracy = (correctAnswers / totalQuestions) * 100;
 
@@ -286,10 +302,13 @@ function Quiz() {
               {markedQuestions.includes(currentQuestion) ? 'Frage entmarkieren' : 'Frage markieren'}
             </button>
             <button onClick={handleShowMarkedQuestions} className="quiz-button">Markierten Fragen anzeigen</button>
-            <button onClick={handleRandomQuestions} className="quiz-button">
-              {isRandomMode ? 'Random-Fragen deaktivieren' : 'Random-Fragen aktivieren'}
+            <button onClick={handleRandomQuestionsToggle} className="quiz-button">
+              {isRandomMode ? 'Random deaktivieren' : 'Random aktivieren'}
             </button>
           </div>
+          
+            
+         
 
           {showAnswer && (
             <div className="full-answer">
