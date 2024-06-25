@@ -27,7 +27,7 @@ body, html {
   position: absolute;
   top: 20px; /* Adjust to move the text above the container */
   width: 100%;
-  padding: 20 20px;
+  padding: 20px;
   box-sizing: border-box;
 }
 
@@ -43,9 +43,11 @@ body, html {
   margin-top: -50px; /* Adjust to move the container up */
   box-sizing: border-box;
 }
+
 .login-container h2 {
   padding-left: 50px;
 }
+
 .input-container,
 .password-container {
   margin-bottom: 20px;
@@ -71,12 +73,11 @@ input {
 }
 
 .remember-me-container {
-  
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  
 }
+
 .remember-me-container label {
   align-items: flex-start;
   padding-right: 20px;
@@ -84,6 +85,12 @@ input {
 
 .remember-me-container input {
   margin-right: 10px;
+}
+
+.login-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .login-button,
@@ -107,11 +114,17 @@ input {
   margin-top: auto;
 }
 
-
 .login-button:hover,
 .sign-up-button:hover,
 .forgot-password-link:hover {
   background-color: #cc7a00;
+}
+
+.aws-logo {
+  width: 100px; /* Adjust the size as needed */
+  height: auto;
+  margin-left: 10px; /* Add some space between the text and the logo */
+  vertical-align: middle; /* Align the logo with the text */
 }
 
 /* Modal styling */
@@ -213,13 +226,10 @@ input {
 
   .modal-content {
     padding: 15px;
-  }}
+  }
 
   .aws-logo {
-    width: 100px; /* Adjust the size as needed */
-    height: auto;
-    margin-left: 100px; /* Add some space between the text and the logo */
-    vertical-align: middle; /* Align the logo with the text */
-  
+    width: 80px; /* Adjust the size as needed for smaller screens */
+    margin-left: 5px; /* Adjust the spacing as needed for smaller screens */
+  }
 }
-
