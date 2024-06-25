@@ -72,7 +72,7 @@ const Login = () => {
   return (
     <div className="login-page">
       <div className="header">
-        <h1>Willkommen bei der Aws Master Quiz App</h1>
+        <h1>Willkommen bei der AWS Master Quiz-App</h1>
       </div>
       <div className="login-container">
         <h2>Einloggen</h2>
@@ -86,7 +86,7 @@ const Login = () => {
             />
           </div>
           <div className="password-container">
-            <label>Password:</label>
+            <label>Passwort:</label>
             <input
               type={showPassword ? 'text' : 'password'}
               value={password}
@@ -99,7 +99,7 @@ const Login = () => {
           {error && <p style={{ color: 'red' }}>{error}</p>}
           <div className="remember-me-container">
             <input type="checkbox" id="rememberMe" name="rememberMe" />
-            <label htmlFor="rememberMe">Benutzernamen merken</label>
+            <label htmlFor="rememberMe">Benutzername Merken</label>
           </div>
           <button type="submit" className="login-button">Weiter</button>
           <button type="button" onClick={() => navigate('/sign-up')} className="sign-up-button">
@@ -118,7 +118,7 @@ const Login = () => {
             {!isConfirming ? (
               <form onSubmit={handleForgotPasswordSubmit}>
                 <label>
-                  Enter your username:
+                  Geben Sie Ihren Benutzernamen ein:
                   <input
                     type="text"
                     value={forgotPasswordEmail}
@@ -126,7 +126,7 @@ const Login = () => {
                     required
                   />
                 </label>
-                <button type="submit">Send Code</button>
+                <button type="submit">Sende den Code</button>
               </form>
             ) : (
               <form onSubmit={handleResetPasswordSubmit}>

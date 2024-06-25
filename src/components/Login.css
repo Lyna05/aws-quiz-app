@@ -69,9 +69,15 @@ input {
 }
 
 .remember-me-container {
+  
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  
+}
+.remember-me-container label {
+  align-items: flex-start;
+  padding-right: 20px;
 }
 
 .remember-me-container input {
