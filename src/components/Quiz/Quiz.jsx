@@ -233,7 +233,7 @@ function Quiz() {
   return (
     <div className="quiz-container">
       <div className="left-panel">
-        <h1>AWS QUIZ PROJEKT APP</h1>
+        <h1>PROJEKT AWS-QUIZ-APP</h1>
         <p>Dieses Projekt wird von Oskar, Gülcan, Lyne, Emanuel, Asadul und Nabil durchgeführt und umgesetzt.</p>
         <p>Slogan: Teamarbeit, Harmonie und gegenseitiger Respekt.</p>
       </div>
