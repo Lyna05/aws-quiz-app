@@ -3,6 +3,7 @@ import { Auth } from 'aws-amplify';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import awsLogo from './aws-logo.png'; // Make sure the path is correct
+
 const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');

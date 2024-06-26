@@ -3,6 +3,7 @@ import { Auth } from 'aws-amplify';
 import { useNavigate } from 'react-router-dom';
 import './SignUp.css';
 
+
 const SignUp = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
