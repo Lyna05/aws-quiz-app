@@ -279,13 +279,13 @@ function Quiz() {
             </button>
             <button
               onClick={() => handleOptionClick(3)}
-              className={selectedOption === 3 ? (question.ans === 3 ? "correct" : "wrong") : ""}
+              className={selectedOption === 3 ? (question.ans === 3 ? "richtig" : "falsch") : ""}
             >
               {question.option3}
             </button>
             <button
               onClick={() => handleOptionClick(4)}
-              className={selectedOption === 4 ? (question.ans === 4 ? "correct" : "wrong") : ""}
+              className={selectedOption === 4 ? (question.ans === 4 ? "richtig" : "falsch") : ""}
             >
               {question.option4}
             </button>
@@ -432,7 +432,7 @@ function Quiz() {
                     <tr key={index}>
                       <td>{index + 1}</td>
                       <td>{data[index].question}</td>
-                      <td>{answeredQuestions.find(a => a.question === index) ? answeredQuestions.find(a => a.question === index).isCorrect ? 'Correct' : 'Wrong' : 'Unanswered'}</td>
+                      <td>{answeredQuestions.find(a => a.question === index) ? answeredQuestions.find(a => a.question === index).isCorrect ? 'Richtig' : 'Falsch' : 'Unbeantwortet'}</td>
                       <td><button onClick={() => handleQuestionClick(index)}>Öffnen</button></td>
                     </tr>
                   ))}
